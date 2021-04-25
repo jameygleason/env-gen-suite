@@ -1,0 +1,98 @@
+section,
+.section {
+  --block-start: 32px;
+  --block-end: 32px;
+  --inline-start: 20px;
+  --inline-end: 20px;
+  --width: 100%;
+  margin: 0 auto;
+  padding-top: var(--block-start);
+  padding-bottom: var(--block-end);
+  padding-right: var(--inline-start);
+  padding-left: var(--inline-end);
+  width: var(--width);
+  max-width: 100%;
+}
+
+section.fw,
+.section.fw {
+  --block-start: 0px;
+  --block-end: 0px;
+  width: 100%;
+}
+
+section.reset,
+.section.reset {
+  --block-start: 0px;
+  --block-end: 0px;
+  --inline-start: 0px;
+  --inline-end: 0px;
+  width: 100%;
+}
+
+@media only screen and (min-width: 640px) {
+  section,
+  .section {
+    --block-start: 56px;
+    --block-end: 56px;
+    --width: 640px;
+  }
+
+  section.xxs,
+  .section.xxs {
+    --width: 384px;
+  }
+}
+
+@media only screen and (min-width: 896px) {
+  section,
+  .section {
+    --inline-start: 32px;
+    --inline-end: 32px;
+    --width: 896px;
+  }
+
+  section.xs,
+  .section.xs {
+    --width: 640px;
+  }
+
+  section.sm,
+  .section.sm {
+    --width: 768px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  section,
+  .section,
+  section.md,
+  .section.md {
+    --block-start: 80px;
+    --block-end: 80px;
+    --width: 1024px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  section,
+  .section,
+  section.lg,
+  .section.lg {
+    --width: 1088px;
+  }
+
+  section.xl,
+  .section.xl {
+    --width: 1320px;
+  }
+}
+
+@media only screen and (min-width: 1552px) {
+  section,
+  .section,
+  section.xl,
+  .section.xl {
+    --width: 1440px;
+  }
+}

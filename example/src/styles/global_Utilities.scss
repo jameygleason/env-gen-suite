@@ -1,0 +1,95 @@
+@mixin debug {
+  border: solid 1px yellow !important;
+}
+
+.debug * {
+  @include debug;
+}
+
+/**
+ * Provides text for screen readers that is hidden from the visual interface.
+ * It is the logical opposite of the aria-hidden attribute.
+ *
+ *
+ * This style differs from "visibility: hidden;" and "display: none;" in that:
+ *
+ *   1. class="hide" removes the element from the flow of the layout. 
+ *     
+ *   2. "visibility: hidden;" maintains the element's space in the layout and
+ *       removes the ability to accept focus.
+ *       https://developer.mozilla.org/en-US/docs/Web/CSS/visibility
+ *
+ *   3. "display: none;" removes the element from the accessibility tree. This will cause the element and all its descendant elements to no longer be announced by screen reading technology.
+ *       https://developer.mozilla.org/en-US/docs/Web/CSS/display#Accessibility_concerns
+ * 
+ * 
+ * In the following example, screen readers will announce "Save" and will ignore the icon;
+ * the browser displays the icon and ignores the text.
+
+  <button>
+    <span class="hide">Save</span>
+    <svg width="32" height="32" aria-hidden>
+      <path d="M16 18l8-8h-6v-8h-4v8h-6zM23.273 14.727l-2.242 2.242 8.128 3.031-13.158 4.907-13.158-4.907 8.127-3.031-2.242-2.242-8.727 3.273v8l16 6 16-6v-8z"></path>
+    </svg>
+  </button>
+
+ */
+@mixin hide {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  position: absolute;
+  // https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+.hide {
+  @include hide;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  background-color: var(--gray700);
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  background-color: var(--gray700);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  border-radius: var(--scrollbar-width);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  background-color: var(--gray400);
+}
+
+.scrollbar-light::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.52);
+  border-radius: 10px;
+  background-color: var(--gray50);
+}
+
+.scrollbar-light::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  background-color: var(--gray50);
+}
+
+.scrollbar-light::-webkit-scrollbar-thumb {
+  border-radius: var(--scrollbar-width);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.58);
+  background-color: var(--gray100);
+}
+
+.no-tp {
+  padding-top: 0 !important;
+}
+
+.no-bp {
+  padding-bottom: 0 !important;
+}

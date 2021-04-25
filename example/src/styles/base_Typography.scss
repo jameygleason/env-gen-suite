@@ -1,0 +1,193 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--ds-text);
+  font-family: var(--display);
+  font-weight: 500;
+  line-height: 1;
+}
+
+/**
+ * @a11y - add tab index -1 to heading tags that need to allow programmatic focus
+ * 
+ * A common use case for this would be the first heading element in a modal, dialogue, or pop-up.
+ * Removing the default outline is ok in this case because we're not asking the user to interact with the heading element. We're just directing focus into to that element for screen readers and tab navigation users.
+ *
+ * ex. <h2 tabindex="-1">Title</h2>
+ */
+:matches(h1, h2, h3, h4, h5, h6):focus {
+  outline: none;
+}
+
+/**
+ * Heading styles
+ */
+@mixin type_xxl {
+  font-size: var(--size10);
+
+  @media only screen and (min-width: 896px) {
+    font-size: var(--size12);
+  }
+}
+
+@mixin type_xl {
+  font-size: var(--size9);
+
+  @media only screen and (min-width: 896px) {
+    font-size: var(--size10);
+  }
+}
+
+@mixin type_l {
+  font-size: var(--size8);
+
+  @media only screen and (min-width: 896px) {
+    font-size: var(--size9);
+  }
+}
+
+@mixin type_m {
+  font-size: var(--size7);
+
+  @media only screen and (min-width: 896px) {
+    font-size: var(--size8);
+  }
+}
+
+@mixin type_s {
+  font-size: var(--size6);
+
+  @media only screen and (min-width: 896px) {
+    font-size: var(--size7);
+  }
+}
+
+@mixin type_s_mono {
+  font-size: 15px;
+
+  @media only screen and (min-width: 896px) {
+    font-size: 17px;
+  }
+}
+
+@mixin type_xs {
+  font-size: var(--size5);
+
+  @media only screen and (min-width: 896px) {
+    font-size: var(--size6);
+  }
+}
+
+@mixin type_xxs {
+  font-size: var(--size4);
+
+  @media only screen and (min-width: 896px) {
+    font-size: var(--size5);
+  }
+}
+
+.page-heading {
+  @include type_xxl;
+  font-weight: 600;
+  letter-spacing: -0.75px;
+  margin-bottom: var(--sp10);
+  text-transform: uppercase;
+}
+
+.xxl {
+  @include type_xxl;
+  letter-spacing: -0.75px;
+}
+
+h1,
+.xl {
+  @include type_xl;
+  letter-spacing: -0.75px;
+}
+
+h2,
+.lg {
+  @include type_l;
+  letter-spacing: -0.35px;
+}
+
+h3,
+.md {
+  @include type_m;
+}
+
+h4,
+.sm {
+  @include type_s;
+}
+
+h5,
+.xs {
+  @include type_xs;
+}
+
+h6,
+.xxs {
+  @include type_xxs;
+}
+
+/**
+ * Block typography
+ */
+p.sm {
+  @include type_xxs;
+}
+
+p,
+p.md {
+  @include type_xs;
+  line-height: var(--size8);
+
+  @media only screen and (min-width: 896px) {
+    line-height: var(--size9);
+  }
+}
+
+p.lg {
+  @include type_s;
+}
+
+p.xl {
+  @include type_m;
+}
+
+ul {
+  @include type_xs;
+}
+
+li,
+li.md {
+  font-size: inherit;
+  line-height: inherit;
+  list-style-type: none;
+}
+
+ul.list {
+  padding-left: 22px;
+}
+
+ul.list li {
+  // Fallback for Safari
+  list-style-type: disc;
+  list-style-type: disclosure-closed;
+}
+
+/**
+  * Inline typography
+  */
+span {
+  font-size: inherit;
+}
+
+small {
+  display: inline-block;
+  @include type_xxs;
+}

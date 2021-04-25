@@ -1,0 +1,31 @@
+/**
+ * By applying a background color to the inline container you will see one limitation of the method.
+ *
+ * Gap will solve this:
+ * https://youtu.be/-oyeaIirVC0?t=821
+ * https://caniuse.com/#feat=flexbox-gap
+ *
+ * .inline { gap: var(--inline-gap); }
+ */
+
+.inline {
+  --inline-gap: var(--sp5);
+  --inline-justify: flex-start;
+  --inline-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: var(--inline-align);
+  justify-content: var(--inline-justify);
+  margin-bottom: calc(-1 * var(--inline-gap));
+  transform: translate(
+    calc(-1 * var(--inline-gap)),
+    calc(-1 * var(--inline-gap))
+  );
+  width: calc(100% + var(--inline-gap));
+  flex: 1 1 0%;
+}
+
+.inline > * {
+  margin-left: var(--inline-gap);
+  margin-top: var(--inline-gap);
+}

@@ -1,0 +1,362 @@
+/**
+ * The default form styles are setup for a stack. To display as an inline form, ie. mailing list sign up, apply "inline_inputs" class to the form element
+ *
+ * Form modifiers - center, inline_inputs
+ *
+ * Label modifiers - hide_label, input-error
+ *
+ * Input modifiers - lg
+ */
+:root form {
+  position: relative;
+}
+
+form button,
+form a.primary,
+form a.secondary {
+  width: 100%;
+}
+
+form a {
+  color: var(--blue500);
+}
+
+form a:hover {
+  text-decoration: underline;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+legend {
+  color: var(--text);
+  padding: 0;
+  display: block;
+  margin-bottom: var(--sp3);
+}
+
+legend h2,
+legend h3,
+legend h4 {
+  color: inherit;
+}
+
+fieldset.center legend {
+  text-align: center;
+}
+
+/**
+ * Goes on a paragraph tag inside the fieldset
+ */
+p.form_description {
+  display: flex;
+  flex-wrap: wrap;
+  color: var(--lt-text);
+  font-size: var(--size4);
+  font-family: var(--display);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--sp8);
+}
+
+label {
+  cursor: pointer;
+  line-height: 1;
+}
+
+label:focus-within {
+  cursor: text;
+}
+
+label > span {
+  color: var(--n_m_gray);
+  display: block;
+  font-family: var(--display);
+  font-size: var(--size3);
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-bottom: var(--sp2);
+}
+
+label.hide_label > span {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  position: absolute;
+  // https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+@mixin input_padding {
+  padding: var(--sp5) var(--sp7);
+}
+
+@mixin large_input_padding {
+  padding: var(--sp7) var(--sp9);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[list],
+textarea,
+select {
+  border: none;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+  border-radius: var(--rad3);
+  cursor: text;
+  display: block;
+  font-family: var(--body);
+  font-size: var(--size5);
+  font-weight: 400;
+  line-height: 22px;
+  min-width: 100%;
+  max-width: 100%;
+  transition: box-shadow 250ms ease;
+  @include input_padding;
+}
+
+label.lg input[type="text"],
+label.lg input[type="email"],
+label.lg input[type="password"],
+label.lg input[type="tel"],
+input[list],
+label.lg textarea,
+label.lg select {
+  @include large_input_padding;
+}
+
+:matches(input[type="text"], input[type="email"], input[type="password"], [type="tel"], input[list], textarea, select):focus {
+  border: none;
+  box-shadow: var(--focus-ring);
+  outline: none;
+  position: relative;
+  z-index: 100;
+}
+
+label.checkbox-label {
+  display: flex;
+  font-size: var(--size3);
+  line-height: 1;
+
+  @media only screen and (min-width: 896px) {
+    font-size: var(--size4);
+  }
+}
+
+label.checkbox-label > button {
+  background: none;
+  border: none;
+  border-radius: 3px;
+  box-shadow: none;
+  font-size: inherit;
+  line-height: inherit;
+  width: auto;
+  height: 15px;
+}
+
+label.checkbox-label input:focus + button,
+label.checkbox-label button:focus {
+  box-shadow: var(--focus-ring);
+}
+
+label.checkbox-label > span {
+  color: var(--blue900);
+  letter-spacing: 0.3px;
+  margin-top: 1px;
+  margin-bottom: 0;
+  margin-left: var(--sp4);
+}
+
+label.checkbox-label svg {
+  height: 15px;
+}
+
+label.checkbox-label .square {
+  fill: var(--blue900);
+}
+
+label.checkbox-label .check {
+  fill: none;
+}
+
+label.checkbox-label .cb-bg,
+label.checkbox-label .check {
+  transition: fill 150ms ease;
+}
+
+label.checkbox-label input:checked + button .cb-bg {
+  fill: var(--blue900);
+}
+
+label.checkbox-label input:checked + button .check {
+  fill: white;
+}
+
+input:disabled {
+  cursor: not-allowed;
+}
+
+label.input-error input {
+  box-shadow: inset 0 0 0 1px var(--red500), 0 1px 2px rgba(162, 17, 17, 0.1),
+    0 1px 3px rgba(162, 17, 17, 0.15);
+}
+
+label.input-error > small {
+  --st-gap: 0;
+  color: var(--red500);
+  display: block;
+  font-size: var(--size3);
+  font-family: var(--body);
+  padding-top: var(--sp3);
+  padding-bottom: 0;
+}
+
+label.lg.input-error > small {
+  --st-gap: 0;
+  padding-top: var(--sp3);
+  padding-bottom: 0;
+}
+
+::placeholder {
+  color: var(--gray500);
+  font-weight: 400;
+}
+
+/**
+ * mufasa_box: use this for things like "Remember me" or "Forgot your password?"
+ */
+.mufasa_box {
+  margin-left: var(--sp3);
+  display: flex;
+  justify-content: space-between;
+}
+
+.mufasa_box :matches(label, .forgot_password) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--blue600);
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+
+.mufasa_box .forgot_password {
+  color: var(--blue400);
+}
+
+.mufasa_box small {
+  letter-spacing: 0.3px;
+  margin-left: var(--sp3);
+}
+
+/**
+ * post_script: use this for things like "Already have an account? Sign in."
+ */
+p.post_script {
+  position: relative;
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  color: var(--gray600);
+  font-size: var(--size3);
+  letter-spacing: 0.5px;
+  padding: var(--sp9) 0;
+  text-align: center;
+  z-index: 1;
+}
+
+p.post_script small {
+  flex: 1 0;
+  padding: 0 var(--sp5);
+  position: relative;
+  width: max-content;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+p.post_script a {
+  font-weight: 700;
+}
+
+p.post_script.kebob:before,
+p.post_script.kebob:after {
+  content: "";
+  background: var(--n_l_gray);
+  display: block;
+  height: 1px;
+  flex: 0 1 100%;
+}
+
+p.post_script.kebob:before {
+  left: 0;
+}
+
+p.post_script.kebob:after {
+  right: 0;
+}
+
+/**
+* Form modifiers
+*/
+form.center {
+  --width: var(--sp26);
+  margin: 0 auto;
+  max-width: var(--width);
+}
+
+// Inline form overrides:
+// Add a class of "inline_inputs" to the form element
+.inline_inputs label {
+  flex: 1 1 50%;
+}
+
+// Override for default span display block
+.inline_inputs label > span {
+  display: inline-block;
+}
+
+.inline_inputs button {
+  flex: 1 0 20%;
+}
+
+/**
+ * This rule: form.hide_labels label > span:has(+ input[type='text'])
+ *
+ * selects span elements that have a text input directly following them
+ *
+ * This would be dope. It has exactly 0 browser support or polyfills as of 11/21/19
+ * 
+ * If this ever becomes and thing you would want to select for text, email, password, number, textarea, etc, but not radio or checkbox because their labels are valuable as click targets.
+ * 
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/:has
+ */
+
+// form.hide_labels label > span:has(+ input[type='text']) {
+//   @include hide;
+// }
+
+/**
+* Input modifiers
+*/
+label.no_b_rad input {
+  border-radius: var(--rad3) var(--rad3) 0 0;
+}
+
+label.no_rad input {
+  border-radius: 0;
+}
+
+label.no_t_rad input {
+  border-radius: 0 0 var(--rad3) var(--rad3);
+}

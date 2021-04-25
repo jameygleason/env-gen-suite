@@ -1,0 +1,23 @@
+.stack {
+  --st-align: left;
+  --st-gap: var(--sp5);
+  display: block;
+  text-align: var(--align);
+}
+
+.stack > * {
+  margin-top: var(--st-gap);
+  display: block;
+}
+
+.stack > .hide {
+  margin-top: 0px;
+}
+
+.stack .hide + * {
+  margin-top: 0px;
+}
+
+.stack > *:first-child {
+  margin-top: 0px;
+}
