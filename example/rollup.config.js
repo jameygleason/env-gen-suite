@@ -14,9 +14,8 @@ import postcsseasings from "postcss-easings"
 import purgecss from "@fullhuman/postcss-purgecss"
 import cssnano from "cssnano"
 import { isEmpty } from "@signalchain/utils/isEmpty"
-import env from "./packages/environment/rollup-plugin-generate-env.js"
-import theme from "./packages/theme/rollup-plugin-generate-theme.js"
 import envVariables from "./.env.js"
+import env from "@signalchain/rollup-plugin-env-gen"
 
 const pkg = JSON.parse(
   fs.readFileSync(path.join(process.cwd(), "package.json"), "utf8"),
@@ -97,7 +96,6 @@ const client = {
   output: config.client.output(),
   plugins: [
     env(),
-    theme(),
     replace({
       "process.browser": true,
       ...ENV_VARS,
@@ -138,9 +136,6 @@ const server = {
   output: config.server.output(),
   plugins: [
     env({
-      emitFiles: false,
-    }),
-    theme({
       emitFiles: false,
     }),
     replace({

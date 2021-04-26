@@ -9,7 +9,7 @@ npm i && \
 echo "" && \
 echo Installing ENV Gen Deps && \
 echo "" && \
-cd theme-engine && \
+cd env-gen && \
 rm -rf node_modules package-lock.json && \
 npm i && \
 echo "" && \

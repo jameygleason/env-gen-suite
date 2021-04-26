@@ -1,17 +1,18 @@
 import fs from "fs"
 import path from "path"
 import { performance } from "perf_hooks"
-import env from "../../.env.js"
 import { print_elapsed } from "./utils/print_elapsed.js"
+import { envPath, blankEnv } from "./config.js"
 
-export default async function generate_ENV() {
+export default async function generateENV() {
   try {
     const start = performance.now()
-    const envPath = path.join(process.cwd(), ".env.js")
+
     if (!fs.existsSync(envPath)) {
-      throw new Error(`File does not exist${envPath}`)
+      fs.writeFileSync(envPath, blankEnv, "utf-8")
     }
 
+    const env = await import(envPath)
     const envKeys = env[process.env.NODE_ENV]
 
     let envStr = "# Generated file. Do not edit.\n"
@@ -21,7 +22,7 @@ export default async function generate_ENV() {
 
     fs.writeFileSync(path.join(process.cwd(), ".env"), envStr, "utf-8")
 
-    print_elapsed(start, "[generate env] Generated ENV")
+    print_elapsed(start, "[env gen] Generated ENV")
   } catch (err) {
     console.error(err)
   }

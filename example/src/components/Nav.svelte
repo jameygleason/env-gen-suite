@@ -1,16 +1,16 @@
 <script>
-  import themeSwitch from '../styles/generated/themeSwitch.js'
+  import themeSwitch from "../styles/generated/themeSwitch.js"
 
   let num = 1
 
   function switchTheme() {
     num += 1
     if (num > 5) num = 1
-    if (num === 1) themeSwitch('main')
-    if (num === 2) themeSwitch('dark')
-    if (num === 3) themeSwitch('blue')
-    if (num === 4) themeSwitch('purple')
-    if (num === 5) themeSwitch('red')
+    if (num === 1) themeSwitch("main")
+    if (num === 2) themeSwitch("dark")
+    if (num === 3) themeSwitch("blue")
+    if (num === 4) themeSwitch("purple")
+    if (num === 5) themeSwitch("red")
   }
 
   export let segment

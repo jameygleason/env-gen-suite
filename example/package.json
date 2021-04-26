@@ -4,13 +4,10 @@
   "version": "0.0.1",
   "scripts": {
     "start": "node __sapper__/build",
-    "dev": "cross-env PACKAGE_DEV=true sapper dev",
+    "dev": "sapper dev",
     "build": "cross-env NODE_ENV=production sapper build",
     "export": "cross-env NODE_ENV=production sapper export",
     "test": "run-p --race cy:open cy:run",
-    "generate": "node -r esm ./sapper-generate.js",
-    "generate:dev": "cross-env NODE_ENV=development PACKAGE_DEV=true node -r esm packages/index.js",
-    "generate:prod": "cross-env NODE_ENV=production node -r esm packages/index.js",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
     "push": "sh ./scripts/push.sh"
@@ -47,6 +44,7 @@
     "@rollup/plugin-node-resolve": "11.2.1",
     "@rollup/plugin-replace": "2.4.2",
     "@rollup/plugin-url": "6.0.0",
+    "@signalchain/rollup-plugin-env-gen": "file:../env-gen",
     "@signalchain/svelte-forms": "0.1.4",
     "@signalchain/utils": "0.1.6",
     "@testing-library/cypress": "7.0.6",
