@@ -27,7 +27,7 @@ export default async function generateENV() {
 
     fs.writeFileSync(path.join(process.cwd(), ".env"), envStr, "utf-8")
 
-    print_elapsed(start, "[env gen] Generated ENV")
+    print_elapsed(start, "[env_gen] Generated ENV")
   } catch (err) {
     console.error(err)
   }

@@ -21,7 +21,7 @@ export default function generateEnvJS() {
     const sanitizedENV = sanitizedStr.replace(numRegex, ": 0")
     fs.writeFileSync(sampleEnvPath, sanitizedENV, "utf-8")
 
-    print_elapsed(start, "[env gen] Generated ENV JS")
+    print_elapsed(start, "[env_gen] Generated ENV JS")
   } catch (err) {
     console.error(err)
   }

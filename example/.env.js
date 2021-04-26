@@ -12,8 +12,6 @@ const prodKeys = {
   NODE_ENV: "production",
 }
 
-// Millisecond converter
-// http://www.kylesconverter.com/time/hours-to-milliseconds
 const sharedKeys = {
   PORT: 3000,
   APP_SECRET:
