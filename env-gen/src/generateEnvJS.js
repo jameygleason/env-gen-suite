@@ -15,8 +15,10 @@ export default function generateEnvJS() {
     }
 
     const env = fs.readFileSync(envPath, "utf-8")
-    const regex = /:\s+".+"/gi
-    const sanitizedENV = env.replace(regex, ': ""')
+    const strRegex = /:\s*?\r?\n?("([^"]|"")*")/gi
+    const sanitizedStr = env.replace(strRegex, ': ""')
+    const numRegex = /:\s*?\r?\n?\d+/gi
+    const sanitizedENV = sanitizedStr.replace(numRegex, ": 0")
     fs.writeFileSync(sampleEnvPath, sanitizedENV, "utf-8")
 
     print_elapsed(start, "[env gen] Generated ENV JS")

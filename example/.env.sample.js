@@ -1,3 +1,8 @@
+// Test
+// Number 02398
+// String "The string below me gets replaced because the reges matches colon string string (\: \" \") pattern"
+// String: ""
+
 const devKeys = {
   NODE_ENV: "",
   FRONTEND_URL: "",
@@ -10,8 +15,9 @@ const prodKeys = {
 // Millisecond converter
 // http://www.kylesconverter.com/time/hours-to-milliseconds
 const sharedKeys = {
-  PORT: 3000,
+  PORT: 0,
   APP_SECRET: "",
+  "123NUM_TEST": "",
 }
 
 export default {
