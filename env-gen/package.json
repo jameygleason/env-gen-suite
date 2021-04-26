@@ -1,6 +1,6 @@
 {
   "name": "@signalchain/rollup-plugin-env-gen",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "",
   "license": "",
   "main": "./dist/index.js",
