@@ -9,7 +9,9 @@
 .prettierignore
 .vscode
 CONTRIBUTING.md
-node_modules/
+node_modules
 rimraf.js
 rollup.config.js
 scripts
+src
+tsconfig.json

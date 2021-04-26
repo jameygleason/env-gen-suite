@@ -13,7 +13,12 @@ export default async function generateENV() {
     }
 
     const env = await import(envPath)
-    const envKeys = env[process.env.NODE_ENV]
+    let envKeys
+    if (Object.keys(env).includes("default")) {
+      envKeys = env.default[process.env.NODE_ENV]
+    } else {
+      envKeys = env[process.env.NODE_ENV]
+    }
 
     let envStr = "# Generated file. Do not edit.\n"
     for (const [key, val] of Object.entries(envKeys)) {

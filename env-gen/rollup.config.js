@@ -53,8 +53,21 @@ export default [
   {
     input: "./src/main.ts",
     output: [
-      { file: pkg.main, format: "es", sourcemap: true, exports: "named" },
-      // { file: pkg.module, format: "es", sourcemap: true, exports: "named" },
+      { file: pkg.main, format: "cjs", sourcemap: true, exports: "named" },
+      { file: pkg.module, format: "es", sourcemap: true, exports: "named" },
+    ],
+    ...config,
+    plugins: [...config.plugins, filesize()],
+  },
+  {
+    input: "./src/runEnvGen.js",
+    output: [
+      {
+        file: "./dist/runEnvGen.js",
+        format: "es",
+        sourcemap: true,
+        exports: "named",
+      },
     ],
     ...config,
     plugins: [...config.plugins, filesize()],

@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "run-p engine sapper",
     "engine": "pushd env-gen && npm run dev",
-    "sapper": "sleep 5 && pushd example && npm run dev",
+    "sapper": "sleep 4 && pushd example && npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "install:all": "sh ./scripts/install.sh",
     "push": "sh ./scripts/push.sh"

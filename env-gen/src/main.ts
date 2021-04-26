@@ -1,8 +1,9 @@
-// @ts-nocheck
 import path from "path"
+import child_process from "child_process"
+import { promisify } from "util"
 import kleur from "kleur"
-import generateEnv from "./generateEnv.js"
-import generateEnvJS from "./generateEnvJS.js"
+
+const exec = promisify(child_process.exec)
 
 let initialized = false
 
@@ -19,6 +20,7 @@ export default function envGen(options) {
 
         if (options?.watch !== false) {
           const env = path.join(process.cwd(), ".env.js")
+          // @ts-ignore
           this.addWatchFile(env)
         }
       } catch (err) {
@@ -42,6 +44,11 @@ export default function envGen(options) {
 }
 
 async function buildEnv() {
-  generateEnv()
-  generateEnvJS()
+  const { stdout, stderr } = await exec(
+    "cross-env NODE_ENV=development node -r esm node_modules/@signalchain/rollup-plugin-env-gen/dist/runEnvGen.js",
+  )
+  console.log(kleur.blue(stdout))
+  if (stderr) {
+    console.error(kleur.red(`Error: ${stderr}`))
+  }
 }
