@@ -14,14 +14,14 @@ export default function envGen(options) {
     async buildStart() {
       try {
         if (!initialized) {
+          // If you add the await keyword, generate theme will run twice on initialization
           buildEnv()
         }
         initialized = true
 
         if (options?.watch !== false) {
-          const env = path.join(process.cwd(), ".env.js")
           // @ts-ignore
-          this.addWatchFile(env)
+          this.addWatchFile(path.join(process.cwd(), ".env.js"))
         }
       } catch (err) {
         console.error(kleur.red(`Error: ${err}`))
@@ -33,8 +33,8 @@ export default function envGen(options) {
         const splitPath = file.split(path.sep)
         const runBuildEnv = splitPath[splitPath.length - 1] === ".env.js"
 
-        if (options?.emitFiles !== false && runBuildEnv) {
-          buildEnv()
+        if (options?.emitFiles !== false && runBuildEnv && initialized) {
+          await buildEnv()
         }
       } catch (err) {
         console.error(kleur.red(`Error: ${err}`))
@@ -44,11 +44,16 @@ export default function envGen(options) {
 }
 
 async function buildEnv() {
-  const { stdout, stderr } = await exec(
-    "cross-env NODE_ENV=development node -r esm node_modules/@signalchain/rollup-plugin-env-gen/dist/runEnvGen.js",
-  )
-  console.log(kleur.blue(stdout))
-  if (stderr) {
-    console.error(kleur.red(`Error: ${stderr}`))
+  try {
+    const { stdout, stderr } = await exec(
+      "cross-env NODE_ENV=development node -r esm node_modules/@signalchain/rollup-plugin-env-gen/dist/runEnvGen.js",
+    )
+    if (stderr) {
+      console.error(kleur.red(`Error: ${stderr}`))
+      return
+    }
+    console.log(kleur.blue(stdout))
+  } catch (err) {
+    console.error(kleur.red(`Error: ${err}`))
   }
 }
