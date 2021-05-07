@@ -1,6 +1,5 @@
-/** @type {import('eslint').Linter.Config} */
-
 /* eslint-disable import/no-commonjs */
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
   env: {
