@@ -1,9 +1,7 @@
 import path from "path"
-import child_process from "child_process"
-import { promisify } from "util"
 import kleur from "kleur"
-
-const exec = promisify(child_process.exec)
+import generateEnv from "./generateEnv.js"
+import generateEnv_JS from "./generateEnvJS.js"
 
 let initialized = false
 
@@ -19,12 +17,13 @@ export default function envGen(options) {
         }
         initialized = true
 
-        if (options?.watch !== false) {
-          // @ts-ignore
-          this.addWatchFile(path.join(process.cwd(), ".env.js"))
-        }
+        // if (options?.watch !== false) {
+        //   // @ts-ignore
+        //   console.log(path.join(process.cwd(), ".env.js"))
+        //   this.addWatchFile(path.join(process.cwd(), ".env.js"))
+        // }
       } catch (err) {
-        console.error(kleur.red(`Error: ${err}`))
+        console.error(kleur.red(`${err}`))
       }
     },
 
@@ -37,7 +36,7 @@ export default function envGen(options) {
           await buildEnv()
         }
       } catch (err) {
-        console.error(kleur.red(`Error: ${err}`))
+        console.error(kleur.red(`${err}`))
       }
     },
   }
@@ -45,15 +44,9 @@ export default function envGen(options) {
 
 async function buildEnv() {
   try {
-    const { stdout, stderr } = await exec(
-      "cross-env NODE_ENV=development node -r esm node_modules/@signalchain/rollup-plugin-env-gen/dist/runEnvGen.js",
-    )
-    if (stderr) {
-      console.error(kleur.red(`Error: ${stderr}`))
-      return
-    }
-    console.log(kleur.blue(stdout))
+    generateEnv()
+    generateEnv_JS()
   } catch (err) {
-    console.error(kleur.red(`Error: ${err}`))
+    console.error(kleur.red(`${err}`))
   }
 }

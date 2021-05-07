@@ -53,8 +53,18 @@ export default [
   {
     input: "./src/main.ts",
     output: [
-      { file: pkg.main, format: "cjs", sourcemap: true, exports: "named" },
-      { file: pkg.module, format: "es", sourcemap: true, exports: "named" },
+      {
+        file: pkg.exports["."].import,
+        format: "es",
+        sourcemap: true,
+        exports: "named",
+      },
+      {
+        file: pkg.exports["."].require,
+        format: "cjs",
+        sourcemap: true,
+        exports: "named",
+      },
     ],
     ...config,
     plugins: [...config.plugins, filesize()],

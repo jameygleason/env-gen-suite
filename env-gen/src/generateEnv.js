@@ -12,7 +12,7 @@ export default async function generateENV() {
       fs.writeFileSync(envPath, blankEnv, "utf-8")
     }
 
-    const env = await import(envPath)
+    const env = await import(`file:\\${envPath}`)
     let envKeys
     if (Object.keys(env).includes("default")) {
       envKeys = env.default[process.env.NODE_ENV]
