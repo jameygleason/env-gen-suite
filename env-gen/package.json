@@ -37,7 +37,8 @@
     "build": "cross-env NODE_ENV=true && rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1",
     "minor": "npm run build && npm version minor --force && npm publish",
-    "patch": "npm run build && npm version patch --force && npm publish"
+    "patch": "npm run build && npm version patch --force && npm publish",
+    "push": "sh ./scripts/push.sh"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "18.1.0",
