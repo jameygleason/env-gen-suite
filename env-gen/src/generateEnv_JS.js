@@ -3,7 +3,7 @@ import { performance } from "perf_hooks"
 import { print_elapsed } from "./utils/print_elapsed.js"
 import { envPath, sampleEnvPath, blankEnv } from "./config.js"
 
-export default function generateEnvJS() {
+export default function generateEnv_JS() {
   try {
     const start = performance.now()
     if (!fs.existsSync(sampleEnvPath)) {

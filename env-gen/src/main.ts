@@ -1,7 +1,7 @@
 import path from "path"
 import kleur from "kleur"
 import generateEnv from "./generateEnv.js"
-import generateEnv_JS from "./generateEnvJS.js"
+import generateEnv_JS from "./generateEnv_JS.js"
 
 let initialized = false
 
@@ -13,7 +13,7 @@ export default function envGen(options) {
       try {
         if (!initialized) {
           // If you add the await keyword, generate theme will run twice on initialization
-          buildEnv()
+          buildEnv(options)
         }
         initialized = true
 
@@ -33,7 +33,7 @@ export default function envGen(options) {
         const runBuildEnv = splitPath[splitPath.length - 1] === ".env.js"
 
         if (options?.emitFiles !== false && runBuildEnv && initialized) {
-          await buildEnv()
+          await buildEnv(options)
         }
       } catch (err) {
         console.error(kleur.red(`${err}`))
@@ -42,9 +42,9 @@ export default function envGen(options) {
   }
 }
 
-async function buildEnv() {
+async function buildEnv(options) {
   try {
-    generateEnv()
+    generateEnv(options)
     generateEnv_JS()
   } catch (err) {
     console.error(kleur.red(`${err}`))
