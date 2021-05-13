@@ -18,12 +18,19 @@ echo "" && \
 npm run build && \
 
 echo "" && \
-echo Installing Example Deps && \
+echo Installing Sapper Example Deps && \
 echo "" && \
-cd ../example && \
+cd ../examples/sapper && \
 rm -rf node_modules package-lock.json && \
 npm i && \
 
-cd .. && \
+echo "" && \
+echo Installing Kit Example Deps && \
+echo "" && \
+cd ../kit && \
+rm -rf node_modules package-lock.json && \
+npm i && \
+
+cd ../.. && \
 
 exit
