@@ -10,9 +10,11 @@
     "dev": "run-p engine sapper",
     "engine": "pushd env-gen && npm run dev",
     "sapper": "sleep 4 && pushd example && npm run dev",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "install:all": "sh ./scripts/install.sh",
-    "push": "sh ./scripts/push.sh"
+    "lint": "pushd .config && lint-staged",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "push": "sh ./scripts/push.sh",
+    "postinstall": "rm -rf .config/husky && husky install .config/husky && husky add .config/husky/pre-commit \"npm run lint\""
   },
   "engines": {
     "node": ">=14.3.0"
@@ -32,7 +34,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "3.4.0",
     "eslint-plugin-promise": "4.3.1",
-    "husky": "4.3.8",
+    "husky": "6.0.0",
     "lint-staged": "10.5.4",
     "npm-run-all": "4.1.5",
     "prettier": "2.2.1"
