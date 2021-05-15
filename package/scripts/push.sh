@@ -2,5 +2,5 @@
 
 cd .. && \
 npm run push && \
-cd ./env-gen && \
+cd ./package && \
 exit

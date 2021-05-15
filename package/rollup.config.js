@@ -31,6 +31,7 @@ const config = {
   ],
   external: [].concat(
     Object.keys(pkg.dependencies || {}),
+    Object.keys(pkg.devDependencies || {}),
     Object.keys(pkg.peerDependencies || {}),
     module.builtinModules,
   ),

@@ -4,7 +4,7 @@ import { performance } from "perf_hooks"
 import { print_elapsed } from "./utils/print_elapsed.js"
 import { envPath, blankEnv } from "./config.js"
 
-export default async function generateENV(options) {
+export default async function generateENV(mode) {
   try {
     const start = performance.now()
 
@@ -12,12 +12,19 @@ export default async function generateENV(options) {
       fs.writeFileSync(envPath, blankEnv, "utf-8")
     }
 
-    const env = await import(`file:\\${envPath}`)
+    let env
+
+    try {
+      env = await import(`file:\\${envPath}`)
+    } catch (err) {
+      env = require(envPath)
+    }
+
     let envKeys
     if (Object.keys(env).includes("default")) {
-      envKeys = env.default[options.mode || process.env.NODE_ENV]
+      envKeys = env.default[mode]
     } else {
-      envKeys = env[options.mode || process.env.NODE_ENV]
+      envKeys = env[mode]
     }
 
     let envStr = "# Generated file. Do not edit.\n"

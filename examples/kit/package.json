@@ -1,0 +1,42 @@
+{
+	"name": "env-gen-svelte-kit-example",
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "svelte-kit dev",
+		"build": "svelte-kit build",
+		"preview": "svelte-kit preview"
+	},
+	"engines": {
+		"node": ">=v14.0.0"
+	},
+	"dependencies": {
+		"@fontsource/fira-mono": "4.2.2",
+		"@lukeed/uuid": "2.0.0",
+		"cookie": "0.4.1"
+	},
+	"devDependencies": {
+		"@signalchain/rollup-plugin-env-gen": "file:../../package",
+		"@sveltejs/kit": "next",
+		"@typescript-eslint/eslint-plugin": "4.22.1",
+		"@typescript-eslint/parser": "4.22.1",
+		"cross-env": "7.0.3",
+		"eslint": "7.26.0",
+		"eslint-config-prettier": "8.3.0",
+		"eslint-config-standard": "16.0.2",
+		"eslint-plugin-cypress": "2.11.3",
+		"eslint-plugin-import": "2.23.2",
+		"eslint-plugin-json": "3.0.0",
+		"eslint-plugin-node": "11.1.0",
+		"eslint-plugin-promise": "4.3.1",
+		"eslint-plugin-svelte3": "3.2.0",
+		"esm": "3.2.25",
+		"prettier": "2.2.1",
+		"prettier-plugin-svelte": "2.2.0",
+		"svelte": "3.38.2",
+		"svelte-preprocess": "4.7.3",
+		"tslib": "2.2.0",
+		"typescript": "4.2.4",
+		"vite": "2.3.2"
+	}
+}

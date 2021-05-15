@@ -3,8 +3,9 @@ const path = require("path")
 
 const ignoreFiles = [
   ".eslintignore",
-  "env-gen/.eslintignore",
+  "package/.eslintignore",
   "examples/sapper/.eslintignore",
+  "examples/kit/.eslintignore",
 ]
 
 function gatherIgnoreFiles() {
