@@ -17,11 +17,6 @@
     "push": "sh ./scripts/push.sh",
     "postinstall": "rm -rf .config/husky && husky install .config/husky && husky add .config/husky/pre-commit \"npm run lint\""
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "devDependencies": {
     "@babel/core": "7.14.0",
     "@babel/eslint-parser": "7.13.14",
