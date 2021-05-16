@@ -5,7 +5,7 @@ import generateEnv_JS from "./generateEnv_JS.js"
 import { envJSPath } from "./config.js"
 
 interface Options {
-  bundler?: string
+  // bundler?: string
   mode?: string
   emitFiles?: boolean
   watch?: boolean
@@ -13,21 +13,28 @@ interface Options {
   // exclude?: string[]
 }
 
+interface Opts {
+  // bundler: string
+  mode: string
+  emitFiles: boolean
+  watch: boolean
+}
+
 let initialized = false
 
 export default function envGen(options: Options) {
-  if (!process?.env?.NODE_ENV && !options?.mode) {
-    throw new Error(
-      'process.env.NODE_ENV could not be detected. Must pass "mode" options.',
-    )
-  }
-
-  const opts: Options = {
-    bundler: options?.bundler,
-    mode: process?.env?.NODE_ENV || options.mode,
+  const opts: Opts = {
+    // bundler: options?.bundler,
+    mode: process?.env?.NODE_ENV || options?.mode || "",
     emitFiles: true,
     watch: true,
     // include: ".env.js",
+  }
+
+  if (opts.mode.length === 0) {
+    throw new Error(
+      'process.env.NODE_ENV could not be detected. Must pass "mode" options.',
+    )
   }
 
   return {
@@ -50,7 +57,7 @@ export default function envGen(options: Options) {
       }
     },
 
-    async watchChange(file) {
+    async watchChange(file: string) {
       try {
         const splitPath = file.split(path.sep)
         const runBuildEnv = splitPath[splitPath.length - 1] === ".env.js"
@@ -65,7 +72,7 @@ export default function envGen(options: Options) {
   }
 }
 
-async function buildEnv(mode) {
+async function buildEnv(mode: string) {
   try {
     generateEnv(mode)
     generateEnv_JS()
