@@ -3,3 +3,13 @@ node_modules
 /.svelte-kit
 /build
 /functions
+generated
+
+# Logs
+yarn-error.log
+.DS_Store
+debug.log
+
+# Environment
+.env
+!/.env.sample.js

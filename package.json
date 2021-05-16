@@ -7,7 +7,7 @@
     "url": "git+ssh://git@gitlab.com/jameygleason/env-gen.git"
   },
   "scripts": {
-    "dev": "run-p engine sapper",
+    "dev": "run-p engine sapper kit",
     "engine": "cd package && npm run dev",
     "sapper": "sleep 4 && cd examples/sapper && npm run dev",
     "kit": "sleep 4 && cd examples/kit && npm run dev",
@@ -16,9 +16,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "push": "sh ./scripts/push.sh",
     "postinstall": "rm -rf .config/husky && husky install .config/husky && husky add .config/husky/pre-commit \"npm run lint\""
-  },
-  "engines": {
-    "node": ">=14.3.0"
   },
   "husky": {
     "hooks": {

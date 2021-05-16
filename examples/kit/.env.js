@@ -1,8 +1,23 @@
-const devKeys = {}
+// Test
+// Number 02398
+// String "The string below me gets replaced because the reges matches colon string string (\: \" \") pattern"
+// String: "I'm get striped away"
 
-const prodKeys = {}
+const devKeys = {
+  NODE_ENV: "development",
+  FRONTEND_URL: "http://localhost:3000",
+}
 
-const sharedKeys = {}
+const prodKeys = {
+  NODE_ENV: "production",
+}
+
+const sharedKeys = {
+  PORT: 3000,
+  APP_SECRET:
+    "bringadingdingdingdingdingdingdingdingdingdingdingdingdingdingding",
+  "123NUM_TEST": "test",
+}
 
 export default {
   development: { ...devKeys, ...sharedKeys },

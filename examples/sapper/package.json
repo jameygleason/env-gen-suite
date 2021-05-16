@@ -1,10 +1,9 @@
 {
-  "name": "theme-engine",
-  "description": "Theme Engine",
-  "version": "0.0.1",
+  "name": "theme-engine-sapper-example",
+  "version": "0.0.0",
   "scripts": {
     "start": "node __sapper__/build",
-    "dev": "node -r esm node_modules/sapper/dist/cli.js dev",
+    "dev": "node -r esm node_modules/sapper/dist/cli.js dev --port 3001",
     "build": "cross-env NODE_ENV=production sapper build",
     "export": "cross-env NODE_ENV=production sapper export",
     "test": "run-p --race cy:open cy:run",

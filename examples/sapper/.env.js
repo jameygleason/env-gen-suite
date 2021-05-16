@@ -5,7 +5,7 @@
 
 const devKeys = {
   NODE_ENV: "development",
-  FRONTEND_URL: "http://localhost:3000",
+  FRONTEND_URL: "http://localhost:3001",
 }
 
 const prodKeys = {
@@ -13,7 +13,7 @@ const prodKeys = {
 }
 
 const sharedKeys = {
-  PORT: 3000,
+  PORT: 3001,
   APP_SECRET:
     "bringadingdingdingdingdingdingdingdingdingdingdingdingdingdingding",
   "123NUM_TEST": "test",

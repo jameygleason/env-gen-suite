@@ -1,7 +1,8 @@
+import path from "path"
 import kleur from "kleur"
 import generateEnv from "./generateEnv.js"
 import generateEnv_JS from "./generateEnv_JS.js"
-import { envPath } from "./config.js"
+import { envJSPath } from "./config.js"
 
 interface Options {
   bundler?: string
@@ -15,8 +16,6 @@ interface Options {
 let initialized = false
 
 export default function envGen(options: Options) {
-  console.log("options:\n\n", options, "\n\n")
-
   if (!process?.env?.NODE_ENV && !options?.mode) {
     throw new Error(
       'process.env.NODE_ENV could not be detected. Must pass "mode" options.',
@@ -24,13 +23,12 @@ export default function envGen(options: Options) {
   }
 
   const opts: Options = {
-    bundler: options?.bundler || "rollup",
-    mode: process?.env?.NODE_ENV || "development",
+    bundler: options?.bundler,
+    mode: process?.env?.NODE_ENV || options.mode,
     emitFiles: true,
     watch: true,
     // include: ".env.js",
   }
-  console.log("opts:", opts)
 
   return {
     name: "env-gen",
@@ -45,25 +43,25 @@ export default function envGen(options: Options) {
 
         if (opts?.watch === true) {
           // @ts-ignore
-          this.addWatchFile(envPath)
+          this.addWatchFile(envJSPath)
         }
       } catch (err) {
         console.error(kleur.red(`${err}`))
       }
     },
 
-    // async watchChange(file) {
-    //   try {
-    //     const splitPath = file.split(path.sep)
-    //     const runBuildEnv = splitPath[splitPath.length - 1] === ".env.js"
+    async watchChange(file) {
+      try {
+        const splitPath = file.split(path.sep)
+        const runBuildEnv = splitPath[splitPath.length - 1] === ".env.js"
 
-    //     if (opts?.emitFiles !== false && runBuildEnv && initialized) {
-    //       await buildEnv(opts.mode)
-    //     }
-    //   } catch (err) {
-    //     console.error(kleur.red(`${err}`))
-    //   }
-    // },
+        if (opts?.emitFiles !== false && runBuildEnv && initialized) {
+          await buildEnv(opts.mode)
+        }
+      } catch (err) {
+        console.error(kleur.red(`${err}`))
+      }
+    },
   }
 }
 

@@ -126,9 +126,6 @@ const client = {
 
   preserveEntrySignatures: false,
   onwarn,
-  watch: {
-    exclude: "./**/generated/**/*",
-  },
 }
 
 const server = {
@@ -169,31 +166,11 @@ const server = {
 
   preserveEntrySignatures: "strict",
   onwarn,
-  watch: {
-    exclude: "./**/generated/**/*",
-  },
 }
-
-// const serviceworker = {
-//   input: config.serviceworker.input(),
-//   output: config.serviceworker.output(),
-//   plugins: [
-//     resolve(),
-//     replace({
-//       'process.browser': true,
-//       ...ENV_VARS,
-//     }),
-//     commonjs(),
-//     !dev && terser(),
-//   ],
-//   preserveEntrySignatures: false,
-//   onwarn,
-// }
 
 const configuration = {
   client,
   server,
-  // serviceworker,
 }
 
 export default configuration
