@@ -14,28 +14,43 @@ function gatherIgnoreFiles() {
     let input = []
 
     for (const p of ignoreFiles) {
-      input.push(path.join(__dirname, "../", p.split("/").join(path.sep)))
+      input.push(path.join("./", p.split("/").join(path.sep)))
     }
 
+    let ignored = {}
     for (const file of input) {
-      const contents = fs.readFileSync(file, { encoding: "utf8" })
+      const dir = file.split(path.sep)
+      const lines = fs.readFileSync(file, { encoding: "utf8" }).split(/\r?\n/g)
 
-      const lines = contents.split(/\r?\n/g)
-
-      for (const line of lines) {
-        str += `,!(../**/*${line})`
+      for (let line of lines.filter(Boolean)) {
+        if (line[0] === "/") {
+          line = line.slice(1, line.length)
+        }
+        if (!!ignored[dir.slice(0, dir.length - 1).join("/")] === false) {
+          ignored[dir.slice(0, dir.length - 1).join("/")] = []
+        }
+        ignored[dir.slice(0, dir.length - 1).join("/")].push(line)
       }
     }
 
-    return str
+    for (const [dir, lines] of Object.entries(ignored)) {
+      for (let line of lines) {
+        if (!!dir === false) {
+          str += `|${line}`
+          continue
+        }
+        str += `|${dir}/${line}`
+      }
+    }
+
+    // Remove leading pipe
+    return str.slice(1, str.length)
   } catch (err) {
     console.error(err)
   }
 }
 
 module.exports = {
-  [`../**/*.(js|ts|json|graphql|svelte),${gatherIgnoreFiles()}`]: [
-    "eslint",
-    "prettier --write",
-  ],
+  // [`**/!(${gatherIgnoreFiles()})/*.{js,ts,json,graphql,svelte}`]: ["eslint"],
+  [`**/!(${gatherIgnoreFiles()})/*.{js,ts,json,graphql}`]: ["eslint"],
 }
