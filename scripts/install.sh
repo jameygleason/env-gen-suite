@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 echo "" && \
 echo Installing Root Deps && \
@@ -11,6 +11,7 @@ echo "" && \
 cd package && \
 npm i && \
 echo "" && \
+
 echo Building ENV Gen && \
 echo "" && \
 npm run build && \

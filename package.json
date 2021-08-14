@@ -12,6 +12,7 @@
     "sapper": "sleep 4 && cd examples/sapper && npm run dev",
     "kit": "sleep 4 && cd examples/kit && npm run dev",
     "install:all": "sh ./scripts/install.sh",
+    "install:clean": "sh ./scripts/clean-install.sh",
     "lint": "lint-staged --config .config/lint-staged.config.cjs",
     "test": "echo \"Error: no test specified\" && exit 1",
     "push": "sh ./scripts/push.sh",

@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 echo "" && \
 echo Installing Root Deps && \
@@ -13,6 +13,7 @@ cd package && \
 rm -rf node_modules package-lock.json && \
 npm i && \
 echo "" && \
+
 echo Building ENV Gen && \
 echo "" && \
 npm run build && \
