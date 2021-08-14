@@ -4,12 +4,11 @@
   "author": "",
   "license": "",
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
   "exports": {
+    "./package.json": "./package.json",
     ".": {
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs.js"
     }
   },
   "types": "./typings/types.d.ts",
@@ -36,9 +35,9 @@
   ],
   "scripts": {
     "dev": "cross-env PACKAGE_DEV=true rollup -c -w",
+    "build": "cross-env NODE_ENV=true && rollup -c",
     "install:all": "sh ./scripts/install.sh",
     "install:clean": "sh ./scripts/clean-install.sh",
-    "build": "cross-env NODE_ENV=true && rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1",
     "minor": "npm run build && npm version minor --force && npm publish",
     "patch": "npm run build && npm version patch --force && npm publish",

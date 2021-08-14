@@ -61,7 +61,22 @@ export default [
         exports: "named",
       },
       {
+        file: pkg.exports["."].import.replace(".js", ".mjs"),
+        format: "es",
+        sourcemap: true,
+        exports: "named",
+      },
+      {
         file: pkg.exports["."].require,
+        format: "cjs",
+        sourcemap: true,
+        exports: "named",
+      },
+      {
+        file: pkg.exports["."].require.slice(
+          0,
+          pkg.exports["."].require.length - 3,
+        ),
         format: "cjs",
         sourcemap: true,
         exports: "named",
