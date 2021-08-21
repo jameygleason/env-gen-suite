@@ -73,10 +73,7 @@ export default [
         exports: "named",
       },
       {
-        file: pkg.exports["."].require.slice(
-          0,
-          pkg.exports["."].require.length - 3,
-        ),
+        file: `${pkg.exports["."].require}.js`,
         format: "cjs",
         sourcemap: true,
         exports: "named",
