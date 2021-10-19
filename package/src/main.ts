@@ -2,11 +2,13 @@ import path from "path"
 import kleur from "kleur"
 import generateEnv from "./generateEnv.js"
 import generateEnv_JS from "./generateEnv_JS.js"
-import { envJSPath } from "./config.js"
+import { envPath, envJSPath } from "./config.js"
 
 interface Options {
   // bundler?: string
   mode?: string
+  path: string
+  output: string
   emitFiles?: boolean
   watch?: boolean
   // include?: string
@@ -16,6 +18,8 @@ interface Options {
 interface Opts {
   // bundler: string
   mode: string
+  path: string
+  output: string
   emitFiles: boolean
   watch: boolean
 }
@@ -26,9 +30,10 @@ export default function envGen(options: Options) {
   const opts: Opts = {
     // bundler: options?.bundler,
     mode: process?.env?.NODE_ENV || options?.mode || "",
+    path: options.path || envJSPath,
+    output: options.output || envPath,
     emitFiles: true,
     watch: true,
-    // include: ".env.js",
   }
 
   if (opts.mode.length === 0) {
@@ -44,7 +49,7 @@ export default function envGen(options: Options) {
       try {
         if (!initialized) {
           // If you add the await keyword, generate theme will run twice on initialization
-          buildEnv(opts.mode)
+          buildEnv(opts)
         }
         initialized = true
 
@@ -63,7 +68,7 @@ export default function envGen(options: Options) {
         const runBuildEnv = splitPath[splitPath.length - 1] === ".env.js"
 
         if (opts?.emitFiles !== false && runBuildEnv && initialized) {
-          await buildEnv(opts.mode)
+          await buildEnv(opts)
         }
       } catch (err) {
         console.error(kleur.red(`${err}`))
@@ -72,9 +77,9 @@ export default function envGen(options: Options) {
   }
 }
 
-async function buildEnv(mode: string) {
+async function buildEnv(options: Opts) {
   try {
-    generateEnv(mode)
+    generateEnv(options)
     generateEnv_JS()
   } catch (err) {
     console.error(kleur.red(`${err}`))

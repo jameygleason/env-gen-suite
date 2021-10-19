@@ -6,6 +6,7 @@
 const devKeys = {
   NODE_ENV: "development",
   FRONTEND_URL: "http://localhost:3000",
+  TEST: "value"
 }
 
 const prodKeys = {

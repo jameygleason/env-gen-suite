@@ -7,7 +7,7 @@
     "url": "git+ssh://git@gitlab.com/jameygleason/env-gen.git"
   },
   "scripts": {
-    "dev": "run-p engine sapper kit",
+    "dev": "run-p engine kit",
     "build": "cd package && npm run build",
     "engine": "cd package && npm run dev",
     "sapper": "sleep 4 && cd examples/sapper && npm run dev",

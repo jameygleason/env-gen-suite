@@ -6,6 +6,7 @@
 const devKeys = {
   NODE_ENV: "",
   FRONTEND_URL: "",
+  TEST: ""
 }
 
 const prodKeys = {
