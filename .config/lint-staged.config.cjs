@@ -77,5 +77,5 @@ function collectIgnoreFiles(root, dirs) {
 }
 
 module.exports = {
-	[`!(${gatherIgnoreFiles()}).{js,ts,json,graphql}`]: ["eslint"],
+	[`!(${gatherIgnoreFiles()}).{js,cjs,mjs,ts,json,graphql}`]: ["eslint"],
 }
