@@ -7,11 +7,10 @@
 		"url": "git+ssh://git@gitlab.com/jameygleason/env-gen.git"
 	},
 	"scripts": {
-		"dev": "run-p engine kit",
-		"build": "cd package && npm run build",
-		"engine": "cd package && npm run dev",
-		"sapper": "sleep 4 && cd examples/sapper && npm run dev",
+		"dev": "run-p package kit",
+		"package": "cd package && npm run dev",
 		"kit": "sleep 4 && cd examples/kit && npm run dev",
+		"build": "cd package && npm run build",
 		"install:all": "sh ./.config/scripts/install.sh",
 		"install:clean": "sh ./.config/scripts/clean-install.sh",
 		"test": "echo \"Error: no test specified\" && exit 1",
@@ -35,5 +34,8 @@
 		"prettier": "2.5.1",
 		"tslib": "2.3.1",
 		"typescript": "4.6.2"
+	},
+	"dependencies": {
+		"dotenv": "^16.0.0"
 	}
 }
