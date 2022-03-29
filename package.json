@@ -1,37 +1,39 @@
 {
-  "name": "env-gen-root",
-  "author": "",
-  "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@gitlab.com/jameygleason/env-gen.git"
-  },
-  "scripts": {
-    "dev": "run-p engine kit",
-    "build": "cd package && npm run build",
-    "engine": "cd package && npm run dev",
-    "sapper": "sleep 4 && cd examples/sapper && npm run dev",
-    "kit": "sleep 4 && cd examples/kit && npm run dev",
-    "install:all": "sh ./scripts/install.sh",
-    "install:clean": "sh ./scripts/clean-install.sh",
-    "lint": "lint-staged --config .config/lint-staged.config.cjs",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "push": "sh ./scripts/push.sh",
-    "postinstall": "rm -rf .config/husky && husky install .config/husky && husky add .config/husky/pre-commit \"npm run lint\""
-  },
-  "devDependencies": {
-    "@babel/core": "7.14.0",
-    "@babel/eslint-parser": "7.13.14",
-    "eslint": "7.25.0",
-    "eslint-config-standard": "16.0.2",
-    "eslint-plugin-import": "2.22.1",
-    "eslint-plugin-json": "2.1.2",
-    "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-prettier": "3.4.0",
-    "eslint-plugin-promise": "4.3.1",
-    "husky": "6.0.0",
-    "lint-staged": "10.5.4",
-    "npm-run-all": "4.1.5",
-    "prettier": "2.2.1"
-  }
+	"name": "env-gen-root",
+	"author": "",
+	"type": "module",
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@gitlab.com/jameygleason/env-gen.git"
+	},
+	"scripts": {
+		"dev": "run-p engine kit",
+		"build": "cd package && npm run build",
+		"engine": "cd package && npm run dev",
+		"sapper": "sleep 4 && cd examples/sapper && npm run dev",
+		"kit": "sleep 4 && cd examples/kit && npm run dev",
+		"install:all": "sh ./.config/scripts/install.sh",
+		"install:clean": "sh ./.config/scripts/clean-install.sh",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"lint": "lint-staged --config .config/lint-staged.config.cjs",
+		"push": "sh ./.config/scripts/push.sh",
+		"postinstall": "rm -rf .config/husky && husky install .config/husky && husky add .config/husky/pre-commit \"npm run lint\""
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "5.14.0",
+		"@typescript-eslint/parser": "5.14.0",
+		"eslint": "8.10.0",
+		"eslint-config-prettier": "8.5.0",
+		"eslint-import-resolver-typescript": "2.5.0",
+		"eslint-plugin-import": "2.25.4",
+		"eslint-plugin-json": "3.1.0",
+		"eslint-plugin-node": "11.1.0",
+		"eslint-plugin-prettier": "4.0.0",
+		"husky": "7.0.4",
+		"lint-staged": "12.3.5",
+		"npm-run-all": "4.1.5",
+		"prettier": "2.5.1",
+		"tslib": "2.3.1",
+		"typescript": "4.6.2"
+	}
 }
