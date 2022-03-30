@@ -1,4 +1,4 @@
-# Generated file. Do not edit.
+// Generated file. Do not edit.
 // Test
 // Number 02398
 // String "The string below me gets replaced because the reges matches colon string string (\: \" \") pattern"
@@ -22,8 +22,19 @@ const production = {
 	NODE_ENV: "",
 };
 
+const sharedPublic = {
+	PUBLIC: false,
+};
+
 const publicVars = {
-	PUBLIC: "",
+	development: {
+		...sharedPublic,
+		PUB_KEY: 0,
+	},
+	production: {
+		...sharedPublic,
+		PUB_KEY: 0,
+	}
 };
 
 export default {

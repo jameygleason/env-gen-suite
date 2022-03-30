@@ -21,8 +21,19 @@ const production = {
 	NODE_ENV: 'production'
 };
 
-const publicVars = {
+const sharedPublic = {
 	PUBLIC: true
+};
+
+const publicVars = {
+	development: {
+		...sharedPublic,
+		PUB_KEY: 123
+	},
+	production: {
+		...sharedPublic,
+		PUB_KEY: 456
+	}
 };
 
 export default {

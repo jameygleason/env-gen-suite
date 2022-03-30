@@ -16,18 +16,24 @@ export function generateSampleEnv() {
 		console.error(err)
 	}
 }
+
 const state = {
 	input: "",
 	output: "// Generated file. Do not edit.\n",
 	pos: 0,
 	leftDelimCount: 0,
 	rightDelimCount: 0,
+	eof: false,
 }
 
 function parseEnv(input) {
 	state.input = input
 
-	while (state.pos <= state.input.length - 1) {
+	while (state.eof === false) {
+		if (outOfBounds()) {
+			break
+		}
+
 		switch (currChar()) {
 			case "{":
 				state.leftDelimCount++
@@ -56,13 +62,88 @@ function parseEnv(input) {
 	return state.output
 }
 
-function currChar() {
-	return state.input[state.pos]
+function parseObject() {
+	if (outOfBounds()) {
+		return
+	}
+
+	if (currChar() === ":") {
+		acceptChar()
+		return lexValue()
+	}
+
+	acceptChar()
+	return parseObject()
 }
 
-function acceptChar() {
-	state.output += currChar()
-	state.pos++
+function lexValue() {
+	if (outOfBounds()) {
+		return
+	}
+
+	eatSpace()
+
+	if (currChar() === "{") {
+		state.leftDelimCount++
+		insert(" ")
+		return parseObject()
+	}
+
+	const value = getValue()
+	const valueType = getValueType(value)
+
+	const zeroVal = {
+		string: '""',
+		number: 0,
+		boolean: false,
+	}[valueType]
+
+	if (currChar() === "}") {
+		state.rightDelimCount++
+
+		let indent = ""
+		for (let i = 0; i < state.leftDelimCount - state.rightDelimCount; i++) {
+			indent += "\t"
+		}
+
+		if (state.leftDelimCount !== 0 && state.leftDelimCount === state.rightDelimCount) {
+			state.leftDelimCount = 0
+			state.rightDelimCount = 0
+
+			insert(` ${zeroVal},\n${indent}}`)
+			state.pos++
+			return
+		}
+
+		insert(` ${zeroVal},\n${indent}}`)
+		state.pos++
+	} else {
+		insert(` ${zeroVal},`)
+		state.pos++
+	}
+
+	return parseObject()
+}
+
+function getValue() {
+	let buildStr = true
+	let value = ""
+
+	while (buildStr) {
+		if (outOfBounds()) {
+			return
+		}
+
+		if (currChar() === "," || currChar() === "}") {
+			buildStr = false
+			break
+		}
+
+		value += currChar()
+		state.pos++
+	}
+
+	return value.trim()
 }
 
 function parseExport() {
@@ -75,63 +156,48 @@ function parseExport() {
 	acceptChar()
 }
 
-// let lexValue = false
-// let wasVal = false
-// let nc = "// Generated file. Do not edit.\n"
+function getValueType(value) {
+	if (!isNaN(Number(value))) {
+		return "number"
+	}
 
-function parseObject() {
-	acceptChar()
+	if (value === "true" || value === "false") {
+		return "boolean"
+	}
 
-	// if (file[i] === ":") {
-	// 	lexValue = true
-	// 	nc += file[i]
-	// 	i++
-	// }
-	// let foundType = false
-	// let valType = "string"
-	// while (lexValue) {
-	// 	if (i > file.length) {
-	// 		break
-	// 	}
-	// 	while (!foundType) {
-	// 		if (file[i] === " ") {
-	// 			i++
-	// 			continue
-	// 		}
-	// 		if (file[i] === "{") {
-	// 			nc += " " + file[i]
-	// 			i++
-	// 			continue
-	// 		}
-	// 		if (!isNaN(Number(file[i]))) {
-	// 			foundType = true
-	// 			valType = "number"
-	// 			i++
-	// 			break
-	// 		}
-	// 		if (typeof file[i] === "string") {
-	// 			foundType = true
-	// 			valType = "string"
-	// 			i++
-	// 			break
-	// 		}
-	// 	}
-	// 	if (file[i] === "," || file[i] === "}") {
-	// 		let val = valType === "number" ? 0 : '""'
-	// 		lexValue = false
-	// 		wasVal = true
-	// 		if (file[i] === "}") {
-	// 			nc += ` ${val},\n}`
-	// 		} else {
-	// 			nc += ` ${val},`
-	// 		}
-	// 		break
-	// 	}
-	// 	i++
-	// }
-	// if (!wasVal) {
-	// 	nc += file[i]
-	// }
-	// wasVal = false
-	// i++
+	if (typeof value === "string") {
+		return "string"
+	}
+
+	return typeof value
+}
+
+function currChar() {
+	return state.input[state.pos]
+}
+
+function acceptChar() {
+	state.output += currChar()
+	state.pos++
+}
+
+function insert(char) {
+	state.output += char
+}
+
+function eatSpace() {
+	while (state.input[state.pos] === " ") {
+		if (outOfBounds()) {
+			break
+		}
+		state.pos++
+	}
+}
+
+function outOfBounds() {
+	if (state.pos >= state.input.length) {
+		state.eof = true
+		return true
+	}
+	return false
 }
