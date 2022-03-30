@@ -39,8 +39,10 @@
 		"dev": "cross-env PACKAGE_DEV=true rollup -c -w",
 		"build": "cross-env NODE_ENV=true && rollup -c",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"minor": "npm run build && npm version minor --force && npm publish",
-		"patch": "npm run build && npm version patch --force && npm publish"
+		"minor": "npm run minor:pre && npm publish",
+		"minor:pre": "npm run build && npm version minor",
+		"patch": "npm run patch:pre && npm publish",
+		"patch:pre": "npm run build && npm version patch"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^21.0.3",
