@@ -1,7 +1,7 @@
 import fs from "fs"
 import { performance } from "perf_hooks"
-import { print_elapsed } from "./utils/print_elapsed.js"
-import { paths } from "./config.js"
+import { print_elapsed } from "../utils/print_elapsed.js"
+import { paths } from "../config.js"
 
 export function generateEnvJS() {
 	try {

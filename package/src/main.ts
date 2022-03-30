@@ -1,5 +1,5 @@
 import path from "path"
-import { buildEnv } from "./buildEnv.js"
+import { buildEnv } from "./buildEnv"
 import { paths } from "./config.js"
 
 export type Options = {

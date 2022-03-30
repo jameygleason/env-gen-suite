@@ -1,7 +1,7 @@
 import fs from "fs"
 import { performance } from "perf_hooks"
-import { print_elapsed } from "./utils/print_elapsed.js"
-import { paths } from "./config.js"
+import { print_elapsed } from "../utils/print_elapsed.js"
+import { paths } from "../config.js"
 
 export async function generateSampleEnv() {
 	try {
@@ -12,7 +12,7 @@ export async function generateSampleEnv() {
 		let lexObject = false
 		let lexValue = false
 		let wasVal = false
-		let nc = ""
+		let nc = "# Generated file. Do not edit.\n"
 
 		let i = 0
 		while (i < file.length) {

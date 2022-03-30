@@ -108,6 +108,7 @@ export default [
 				extensions: [".cjs", ".mjs", ".js", ".ts"],
 			}),
 			commonjs(),
+			typescript(),
 			filesize(),
 		],
 		...config,

@@ -1,25 +1,16 @@
 import fs from "fs"
-import os from "os"
 import { performance } from "perf_hooks"
-import { print_elapsed } from "./utils/print_elapsed.js"
-import type { Options } from "./main"
+import { getEnv } from "../utils/getEnv"
+import { print_elapsed } from "../utils/print_elapsed.js"
+import type { Options } from "../main"
 
 export async function generateEnv(options: Options) {
 	try {
 		const start = performance.now()
-
-		let env
-		if (os.platform() === "linux") {
-			// Tested on pop_os!
-			env = await import(`file:\\\\${options.input}`)
-		} else {
-			env = await import(`file:\\${options.input}`)
-		}
-
-		const envKeys = env.default[options.mode]
+		const env = await getEnv(options)
 
 		let envStr = "# Generated file. Do not edit.\n"
-		for (const [key, val] of Object.entries(envKeys)) {
+		for (const [key, val] of Object.entries(env[options.mode])) {
 			if (typeof val === "string") {
 				envStr = envStr + `${key}="${val}"\n`
 				continue

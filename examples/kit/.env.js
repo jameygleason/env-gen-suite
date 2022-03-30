@@ -21,7 +21,12 @@ const production = {
 	NODE_ENV: 'production'
 };
 
+const publicVars = {
+	PUBLIC: true
+};
+
 export default {
 	development,
-	production
+	production,
+	publicVars
 };

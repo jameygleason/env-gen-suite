@@ -1,3 +1,4 @@
+# Generated file. Do not edit.
 // Test
 // Number 02398
 // String "The string below me gets replaced because the reges matches colon string string (\: \" \") pattern"
@@ -21,7 +22,12 @@ const production = {
 	NODE_ENV: "",
 };
 
+const publicVars = {
+	PUBLIC: "",
+};
+
 export default {
 	development,
-	production
+	production,
+	publicVars
 };
