@@ -14,7 +14,7 @@ export async function buildEnv(options: Options) {
 
 		await generateEnv(options)
 		await generatePublicEnv(options)
-		await generateSampleEnv()
+		generateSampleEnv()
 	} catch (err) {
 		console.error(err)
 	}

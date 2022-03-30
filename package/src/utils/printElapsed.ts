@@ -2,10 +2,13 @@ import { performance } from "perf_hooks"
 import kleur from "kleur"
 
 /**
- * @param {number} start
- * @param {string} msg
+ * Usage:
+ *
+ * const start = performance.now()
+ * printElapsed(start, "Build complete")
  */
-export function print_elapsed(start, msg) {
+
+export function printElapsed(start: number, msg: string) {
 	const end = performance.now()
 	let elapsed = end - start
 	let unit = "ms"
