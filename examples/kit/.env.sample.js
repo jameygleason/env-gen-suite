@@ -1,25 +1,27 @@
 // Test
 // Number 02398
 // String "The string below me gets replaced because the reges matches colon string string (\: \" \") pattern"
-// String: ""
+// String: "I'm get striped away"
 
-const devKeys = {
-  NODE_ENV: "",
-  FRONTEND_URL: "",
-  TEST: ""
-}
+const shared = {
+	PORT: 0,
+	APP_SECRET: "",
+	'123NUM_TEST': "",
+};
 
-const prodKeys = {
-  NODE_ENV: "",
-}
+const development = {
+	...shared,
+	NODE_ENV: "",
+	FRONTEND_URL: "",
+	TEST: "",
+};
 
-const sharedKeys = {
-  PORT: 0,
-  APP_SECRET: "",
-  "123NUM_TEST": "",
-}
+const production = {
+	...shared,
+	NODE_ENV: "",
+};
 
 export default {
-  development: { ...devKeys, ...sharedKeys },
-  production: { ...prodKeys, ...sharedKeys },
-}
+	development,
+	production
+};

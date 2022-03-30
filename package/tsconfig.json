@@ -2,33 +2,21 @@
 	"compilerOptions": {
 		"allowSyntheticDefaultImports": true,
 		"allowUnreachableCode": true,
-		"alwaysStrict": true,
-		"baseUrl": ".",
-		"declaration": true,
-		"declarationDir": "./types",
-		"declarationMap": true,
 		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
+		"baseUrl": ".",
 		"importHelpers": true,
-		"lib": ["es2019", "dom", "dom.iterable"],
-		"module": "ESNext",
+		"lib": ["es2019"],
+		"module": "es2020",
 		"moduleResolution": "node",
 		"noEmit": true,
-		"noFallthroughCasesInSwitch": true,
-		"noImplicitAny": true,
 		"noImplicitThis": true,
-		"resolveJsonModule": true,
+		"resolveJsonModule": false,
 		"skipLibCheck": true,
-		"strictBindCallApply": true,
-		"strictFunctionTypes": true,
 		"strictNullChecks": true,
-		"strictPropertyInitialization": true,
-		"stripInternal": true,
 		"target": "es2019",
-		"types": ["mocha", "node"],
 		"paths": {
 			"@signalchain/utils/rimraf": ["node_modules/@signalchain/utils/dist/rimraf"]
 		}
 	},
-	"exclude": ["node_modules", "dist", "types"]
+	"exclude": ["node_modules", "dist", "data/generated"]
 }

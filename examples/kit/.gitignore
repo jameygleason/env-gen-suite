@@ -1,15 +1,10 @@
 .DS_Store
 node_modules
-/.svelte-kit
 /build
-/functions
-generated
-
-# Logs
-yarn-error.log
-.DS_Store
-debug.log
-
-# Environment
+/.svelte-kit
+/package
 .env
-!/.env.sample.js
+.env.*
+!.env.example
+.vercel
+.output

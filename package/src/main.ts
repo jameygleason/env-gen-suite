@@ -1,44 +1,35 @@
 import path from "path"
-import kleur from "kleur"
-import generateEnv from "./generateEnv.js"
-import generateEnvJS from "./generateEnvJS.js"
-import { envPath, envJSPath } from "./config.js"
+import { buildEnv } from "./buildEnv.js"
+import { paths } from "./config.js"
 
-interface Options {
-	// bundler?: string
-	mode?: string
-	path: string
-	output: string
-	emitFiles?: boolean
-	watch?: boolean
-	// include?: string
-	// exclude?: string[]
-}
-
-interface Opts {
-	// bundler: string
+export type Options = {
 	mode: string
-	path: string
-	output: string
-	emitFiles: boolean
+	input: string
+	envOutput: string
+	sampleOutput: string
+	publicOutput: string
 	watch: boolean
 }
 
-let initialized = false
-
 export default function envGen(options: Options) {
-	const opts: Opts = {
-		// bundler: options?.bundler,
-		mode: process?.env?.NODE_ENV || options?.mode || "",
-		path: options.path || envJSPath,
-		output: options.output || envPath,
-		emitFiles: true,
+	let mode = process.env?.NODE_ENV
+	if (options?.mode) {
+		mode = options.mode
+	}
+	if (!mode) {
+		throw new Error('NODE_ENV could not be detected. Missing required field "mode".')
+	}
+
+	options = {
+		mode,
+		input: options?.input || paths.input,
+		envOutput: options?.envOutput || paths.env,
+		sampleOutput: options?.sampleOutput || paths.sampleEnv,
+		publicOutput: options?.publicOutput || paths.publicEnv,
 		watch: true,
 	}
 
-	if (opts.mode.length === 0) {
-		throw new Error('process.env.NODE_ENV could not be detected. Must pass "mode" options.')
-	}
+	let initialized = false
 
 	return {
 		name: "env-gen",
@@ -46,39 +37,30 @@ export default function envGen(options: Options) {
 		buildStart() {
 			try {
 				if (!initialized) {
-					buildEnv(opts)
+					buildEnv(options)
 				}
 				initialized = true
 
-				if (opts?.watch === true) {
+				if (options?.watch === true) {
 					// @ts-ignore
-					this.addWatchFile(envJSPath)
+					this.addWatchFile(paths.input)
 				}
 			} catch (err) {
-				console.error(kleur.red(`${err}`))
+				console.error(err)
 			}
 		},
 
 		async watchChange(file: string) {
 			try {
 				const splitPath = file.split(path.sep)
-				const runBuildEnv = splitPath[splitPath.length - 1] === ".env.js"
+				const inputChanged = splitPath[splitPath.length - 1] === ".env.js"
 
-				if (opts?.emitFiles !== false && runBuildEnv && initialized) {
-					await buildEnv(opts)
+				if (inputChanged && initialized) {
+					await buildEnv(options)
 				}
 			} catch (err) {
-				console.error(kleur.red(`${err}`))
+				console.error(err)
 			}
 		},
-	}
-}
-
-async function buildEnv(options: Opts) {
-	try {
-		await generateEnv(options)
-		generateEnvJS()
-	} catch (err) {
-		console.error(kleur.red(`${err}`))
 	}
 }
