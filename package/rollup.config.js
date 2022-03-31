@@ -9,6 +9,8 @@ import dts from "rollup-plugin-dts"
 import filesize from "rollup-plugin-filesize"
 import { rimraf } from "@signalchain/utils"
 
+const dev = process.env.NODE_ENV
+
 const pkg = JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json"), "utf8"))
 if (Object.keys(pkg).length === 0) {
 	console.error("Failed to parse package.json")
@@ -65,7 +67,7 @@ export default [
 		],
 		...config,
 	},
-	{
+	!dev && {
 		input: "src/main.ts",
 		output: {
 			file: pkg.exports["."].types,
@@ -81,7 +83,7 @@ export default [
 			module.builtinModules,
 		),
 	},
-	{
+	!dev && {
 		input: "./src/generate.ts",
 		output: [
 			{
@@ -113,4 +115,4 @@ export default [
 		],
 		...config,
 	},
-]
+].filter(Boolean)
