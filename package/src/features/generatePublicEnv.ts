@@ -23,7 +23,7 @@ export async function generatePublicEnv(options: Options) {
 
 		const contents = `// Generated file. Edit in ${getRelativeRoot(options)}\nconst publicVars = ${objectToString(
 			vars,
-		)}\n\nexport default publicVars`
+		)}\n\nexport default publicVars\n`
 
 		fs.writeFileSync(options.publicOutput, contents)
 

@@ -3,12 +3,12 @@ import { buildEnv } from "./buildEnv"
 import { paths } from "./config.js"
 
 export type Options = {
-	mode: string
-	input: string
-	envOutput: string
-	sampleOutput: string
-	publicOutput: string
-	watch: boolean
+	mode?: string
+	input?: string
+	envOutput?: string
+	sampleOutput?: string | boolean
+	publicOutput?: string
+	watch?: boolean
 }
 
 export default function envGen(options: Options) {

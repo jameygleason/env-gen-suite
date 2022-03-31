@@ -1,4 +1,4 @@
-export function objectToString<T>(arg: T, pad = "", indention = "spaces"): string {
+export function objectToString<T>(arg: T, pad = "", indention = "tabs"): string {
 	const indent = indention === "spaces" ? "  " : "\t"
 	let out = ""
 
