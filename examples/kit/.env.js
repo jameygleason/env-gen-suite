@@ -21,6 +21,8 @@ const production = {
 	NODE_ENV: 'production'
 };
 
+// TODO: Handle template string templates
+// PRINT_STRING: '%`http://${window.location.host}`%'
 const sharedPublic = {
 	PUBLIC: true
 };

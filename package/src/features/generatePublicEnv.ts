@@ -40,3 +40,35 @@ export async function generatePublicEnv(options: Options) {
 		console.error(err)
 	}
 }
+
+// TODO
+// let newEnv = {}
+
+// function handleTemplateStr(input) {
+// 	console.log("\n++++++++++++++++++++++++++++++")
+// 	console.log(input)
+
+// 	if (input.toString() === "[object Object]") {
+// 		for (const [k, v] of Object.entries(input)) {
+// 			// @ts-ignore
+// 			if (v.toString() === "[object Object]") {
+// 				console.log(`${k}:`, v)
+
+// 				// newEnv[k] = {}
+// 				// const part = Object.fromEntries([[k, v]])
+// 				return handleTemplateStr(v)
+// 			}
+
+// 			console.log(v)
+// 			let str = stripTemplateDelims(v)
+// 			console.log("str:", str)
+// 		}
+// 	}
+// }
+
+// function stripTemplateDelims(input) {
+// 	if (input[0] === "%" && input[input.length - 1] === "%") {
+// 		input = input.slice(1, input.length - 1)
+// 	}
+// 	return input
+// }
