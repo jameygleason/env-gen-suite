@@ -19,11 +19,19 @@ export async function generatePublicEnv(options: Options) {
 			throw new Error(`"Property ${options.mode}" doesn't exist on "publicVars"`)
 		}
 
+		if (!options?.mode) {
+			throw new Error(`Expected "mode" option to be a string. Received ${typeof options?.mode}`)
+		}
+
 		const vars = env.publicVars[options.mode]
 
 		const contents = `// Generated file. Edit in ${getRelativeRoot(options)}\nconst publicVars = ${objectToString(
 			vars,
 		)}\n\nexport default publicVars\n`
+
+		if (!options?.publicOutput) {
+			throw new Error(`Expected "publicOutput" option to be a string. Received ${typeof options?.publicOutput}`)
+		}
 
 		fs.writeFileSync(options.publicOutput, contents)
 

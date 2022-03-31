@@ -15,12 +15,21 @@ export async function generateEnv(options: Options) {
 		}
 
 		let envStr = `# Generated file. Edit in ${getRelativeRoot(options)}\n`
+
+		if (!options?.mode) {
+			throw new Error(`Expected "mode" option to be a string. Received ${typeof options?.mode}`)
+		}
+
 		for (const [key, val] of Object.entries(env[options.mode])) {
 			if (typeof val === "string") {
 				envStr += `${key}="${val}"\n`
 				continue
 			}
 			envStr += `${key}=${val}\n`
+		}
+
+		if (!options?.envOutput) {
+			throw new Error(`Expected "envOutput" option to be a string. Received ${typeof options?.envOutput}`)
 		}
 
 		fs.writeFileSync(options.envOutput, envStr, "utf-8")
