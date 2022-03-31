@@ -1,14 +1,18 @@
 import os from "os"
 
 export async function getEnv(options) {
-	let env
+	try {
+		let env
 
-	if (os.platform() === "linux") {
-		// Tested on pop_os!
-		env = await import(`file:\\\\${options.input}`)
-	} else {
-		env = await import(`file:\\${options.input}`)
+		if (os.platform() === "linux") {
+			// Tested on pop_os!
+			env = await import(`file:\\\\${options.input}`)
+		} else {
+			env = await import(`file:\\${options.input}`)
+		}
+
+		return env.default
+	} catch (err) {
+		console.error(err)
 	}
-
-	return env.default
 }
