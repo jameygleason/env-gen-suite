@@ -36,9 +36,8 @@
 		"README.md"
 	],
 	"scripts": {
-		"dev": "cross-env PACKAGE_DEV=true rollup -c -w",
-		"build": "cross-env NODE_ENV=true && rollup -c",
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "cross-env NODE_ENV=development rollup -c -w",
+		"build": "cross-env NODE_ENV=production && rollup -c",
 		"minor": "npm run minor:pre && npm publish",
 		"minor:pre": "npm run build && npm version minor",
 		"patch": "npm run patch:pre && npm publish",
