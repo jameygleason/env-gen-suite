@@ -38,6 +38,7 @@
 	"scripts": {
 		"dev": "cross-env NODE_ENV=development rollup -c -w",
 		"build": "cross-env NODE_ENV=production && rollup -c",
+		"test": "vitest",
 		"minor": "npm run minor:pre && npm publish",
 		"minor:pre": "npm run build && npm version minor",
 		"patch": "npm run patch:pre && npm publish",
@@ -68,7 +69,9 @@
 		"rollup-plugin-dts": "^4.2.0",
 		"rollup-plugin-filesize": "^9.1.2",
 		"tslib": "^2.3.1",
-		"typescript": "^4.6.3"
+		"typescript": "^4.6.3",
+		"vite": "^2.9.1",
+		"vitest": "^0.8.1"
 	},
 	"peerDependencies": {
 		"kleur": ">=4.0.0"
