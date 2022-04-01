@@ -1,7 +1,7 @@
-const state = {
+let state = {
 	preserve: false,
 	input: "",
-	output: "// Generated file. Do not edit.\n",
+	output: "",
 	pos: 0,
 	leftDelimCount: 0,
 	rightDelimCount: 0,
@@ -9,8 +9,15 @@ const state = {
 }
 
 export function parseEnv(input, preserveAssignments) {
-	state.preserve = preserveAssignments
-	state.input = input
+	state = {
+		preserve: preserveAssignments || false,
+		input,
+		output: "// Generated file. Do not edit.\n",
+		pos: 0,
+		leftDelimCount: 0,
+		rightDelimCount: 0,
+		eof: false,
+	}
 
 	while (state.eof === false) {
 		if (outOfBounds()) {
@@ -23,6 +30,8 @@ export function parseEnv(input, preserveAssignments) {
 }
 
 function run() {
+	acceptWhitespace()
+
 	switch (currChar()) {
 		case "=":
 			acceptChar()
@@ -127,11 +136,18 @@ function parseString() {
 }
 
 function parseNumber() {
-	while (!outOfBounds() && !isNaN(Number(currChar()))) {
+	insert(0)
+
+	while (
+		!outOfBounds() &&
+		!isNaN(Number(currChar())) &&
+		currChar() !== "\n" &&
+		currChar() !== "\r" &&
+		currChar() !== "\t" &&
+		currChar() !== " "
+	) {
 		eat()
 	}
-
-	insert(0)
 }
 
 function parseVar() {

@@ -9,9 +9,11 @@ export default {
 	publicEnv: {
 		development: {
 			TEST: false,
+			NUMBER: 0,
 		},
 		production: {
 			TEST: false,
+			TEMPLATE: "",
 		},
 	},
 }

@@ -1,7 +1,10 @@
 // Test
-// Number 02398
-// String "The string below me gets replaced because the reges matches colon string string (\: \" \") pattern"
+// String "I don't get replaced, but the string below me gets replaced because it comes after a colon"
 // String: "I'm get striped away"
+// Number 02398
+// Number: 02398
+// Boolean true
+// Boolean: true
 
 const shared = {
 	PORT: 3000,
@@ -21,16 +24,16 @@ const production = {
 	NODE_ENV: 'production'
 };
 
-// TODO: Handle template string templates
-// PRINT_STRING: '%`http://${window.location.host}`%'
 const sharedPublic = {
 	PUBLIC: true
+	// TODO: Handle template string templates
+	// PRINT_STRING: '%`http://${window.location.host}`%'
 };
 
 const publicVars = {
 	development: {
-		...sharedPublic,
-		PUB_KEY: 123
+		PUB_KEY: 123,
+		...sharedPublic
 	},
 	production: {
 		...sharedPublic,

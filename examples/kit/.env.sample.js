@@ -1,41 +1,44 @@
 // Generated file. Do not edit.
 // Test
+// String "I don't get replaced, but the string below me gets replaced because it comes after a colon"
+// String: ""
 // Number 02398
-// String "The string below me gets replaced because the reges matches colon string string (\: \" \") pattern"
-// String: "I'm get striped away"
+// Number: 0
+// Boolean true
+// Boolean: false
 
 const shared = {
 	PORT: 0,
 	APP_SECRET: "",
-	'123NUM_TEST': "",
+	'123NUM_TEST': ""
 };
 
 const development = {
 	...shared,
 	NODE_ENV: "",
 	FRONTEND_URL: "",
-	TEST: "",
+	TEST: ""
 };
 
 const production = {
 	...shared,
-	NODE_ENV: "",
+	NODE_ENV: ""
 };
 
-// TODO: Handle template string templates
-// PRINT_STRING: '%`http://${window.location.host}`%'
 const sharedPublic = {
-	PUBLIC: false,
+	PUBLIC: false
+	// TODO: Handle template string templates
+	// PRINT_STRING: ""
 };
 
 const publicVars = {
 	development: {
-		...sharedPublic,
 		PUB_KEY: 0,
+		...sharedPublic
 	},
 	production: {
 		...sharedPublic,
-		PUB_KEY: 0,
+		PUB_KEY: 0
 	}
 };
 

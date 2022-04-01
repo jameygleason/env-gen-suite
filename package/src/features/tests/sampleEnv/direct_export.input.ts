@@ -8,9 +8,11 @@ export default {
 	publicEnv: {
 		development: {
 			TEST: true,
+			NUMBER: 29475,
 		},
 		production: {
 			TEST: true,
+			TEMPLATE: `${"test"}`,
 		},
 	},
 }
