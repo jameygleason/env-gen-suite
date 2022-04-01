@@ -1,6 +1,6 @@
 import path from "path"
 import { buildEnv } from "./buildEnv"
-import { paths } from "./config.js"
+import { paths } from "./config"
 
 export type Options = {
 	mode?: string

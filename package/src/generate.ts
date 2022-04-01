@@ -1,1 +1,1 @@
-export { buildEnv } from "./buildEnv.js"
+export { buildEnv } from "./buildEnv"

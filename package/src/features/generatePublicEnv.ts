@@ -1,9 +1,9 @@
 import fs from "fs"
 import { performance } from "perf_hooks"
-import { getEnv } from "../utils/getEnv"
-import { printElapsed } from "../utils/printElapsed"
-import { objectToString } from "../utils/objectToString"
-import { getRelativeRoot } from "../utils/getRelativeRoot"
+import { getEnv } from "./utils/getEnv"
+import { printElapsed } from "./utils/printElapsed"
+import { objectToString } from "./utils/objectToString"
+import { getRelativeRoot } from "./utils/getRelativeRoot"
 import type { Options } from "../main"
 
 export async function generatePublicEnv(options: Options) {
