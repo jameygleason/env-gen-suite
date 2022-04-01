@@ -3,20 +3,19 @@ import { generateEnv } from "./features/generateEnv"
 import { generateEnvJS } from "./features/generateEnvJS"
 import { generatePublicEnv } from "./features/generatePublicEnv"
 import { generateSampleEnv } from "./features/generateSampleEnv"
-import { paths } from "./config"
-import type { Options } from "./main"
+import type { InternalOptions } from "./main"
 
-export async function buildEnv(options: Options) {
+export async function buildEnv(options: InternalOptions): Promise<void> {
 	try {
-		if (!fs.existsSync(paths.input)) {
-			generateEnvJS()
+		if (!fs.existsSync(options.inputPath)) {
+			generateEnvJS(options)
 		}
 
 		await generateEnv(options)
 		await generatePublicEnv(options)
 
-		if (options.sampleOutput) {
-			generateSampleEnv()
+		if (typeof options.samplePath !== "string") {
+			generateSampleEnv(options)
 		}
 	} catch (err) {
 		console.error(err)

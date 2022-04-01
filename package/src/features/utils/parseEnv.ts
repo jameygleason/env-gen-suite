@@ -8,11 +8,11 @@ let state = {
 	eof: false,
 }
 
-export function parseEnv(input, preserveAssignments) {
+export function parseEnv(relRoot: string, input: string, preserveAssignments: boolean): string {
 	state = {
 		preserve: preserveAssignments || false,
 		input,
-		output: "// Generated file. Do not edit.\n",
+		output: `// Generated file. Edit in ${relRoot}\n`,
 		pos: 0,
 		leftDelimCount: 0,
 		rightDelimCount: 0,

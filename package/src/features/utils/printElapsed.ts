@@ -3,12 +3,11 @@ import kleur from "kleur"
 
 /**
  * Usage:
- *
  * const start = performance.now()
+ * <YOUR CODE>
  * printElapsed(start, "Build complete")
  */
-
-export function printElapsed(start: number, msg: string) {
+export function printElapsed(start: number, msg: string): void {
 	const end = performance.now()
 	let elapsed = end - start
 	let unit = "ms"

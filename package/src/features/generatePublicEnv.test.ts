@@ -3,7 +3,10 @@ import path from "path"
 import { describe, it, assert } from "vitest"
 import { parseEnv } from "./utils/parseEnv"
 
-const tests = [{ file: "direct_export" }, { file: "indirect_export" }]
+const tests = [
+	{ file: "direct_export" },
+	// { file: "indirect_export" }
+]
 
 describe.skip("Generate Public Env Output", () => {
 	it("Generates public env output as string", () => {
@@ -18,7 +21,7 @@ describe.skip("Generate Public Env Output", () => {
 				"utf8",
 			)
 
-			const data = parseEnv(input, true)
+			const data = parseEnv(".env.js", input, true)
 			assert.strictEqual(data, output)
 		}
 	})

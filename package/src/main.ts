@@ -1,32 +1,53 @@
 import path from "path"
 import { buildEnv } from "./buildEnv"
-import { paths } from "./config"
+import { getRelativeRoot } from "./features/utils/getRelativeRoot"
+
+type ConfigPaths = {
+	input: string
+	env: string
+	sampleEnv: string
+	publicEnv: string
+}
+
+const paths: ConfigPaths = {
+	input: path.join(process.cwd(), ".env.js"),
+	env: path.join(process.cwd(), ".env"),
+	sampleEnv: path.join(process.cwd(), ".env.sample.js"),
+	publicEnv: path.join(process.cwd(), "src", "publicEnv.js"),
+}
 
 export type Options = {
 	mode?: string
-	input?: string
-	envOutput?: string
-	sampleOutput?: string | boolean
-	publicOutput?: string
+	inputPath?: string
+	envPath?: string
+	samplePath?: string | boolean
+	publicPath?: string
 	watch?: boolean
 }
 
-export default function envGen(options: Options) {
-	let mode = process.env?.NODE_ENV
-	if (options?.mode) {
-		mode = options.mode
-	}
-	if (!mode) {
-		throw new Error('NODE_ENV could not be detected. Missing required field "mode".')
+export type InternalOptions = {
+	mode: string
+	inputPath: string
+	envPath: string
+	samplePath: string | boolean
+	publicPath: string
+	watch: boolean
+	relativeRoot: string
+}
+
+export default function envGen(o: Options) {
+	const options: InternalOptions = {
+		mode: o?.mode || process.env?.NODE_ENV || "",
+		inputPath: o?.inputPath || paths.input,
+		envPath: o?.envPath || paths.env,
+		samplePath: o?.samplePath || paths.sampleEnv,
+		publicPath: o?.publicPath || paths.publicEnv,
+		watch: true,
+		relativeRoot: getRelativeRoot(o?.inputPath || paths.input),
 	}
 
-	options = {
-		mode,
-		input: options?.input || paths.input,
-		envOutput: options?.envOutput || paths.env,
-		sampleOutput: options?.sampleOutput || paths.sampleEnv,
-		publicOutput: options?.publicOutput || paths.publicEnv,
-		watch: true,
+	if (!!options?.mode === false) {
+		throw new Error('NODE_ENV could not be detected. Missing required field "mode".')
 	}
 
 	let initialized = false
@@ -43,7 +64,7 @@ export default function envGen(options: Options) {
 
 				if (options?.watch === true) {
 					// @ts-ignore
-					this.addWatchFile(paths.input)
+					this.addWatchFile(options.inputPath)
 				}
 			} catch (err) {
 				console.error(err)
@@ -53,7 +74,7 @@ export default function envGen(options: Options) {
 		async watchChange(file: string) {
 			try {
 				const splitPath = file.split(path.sep)
-				const inputChanged = splitPath[splitPath.length - 1] === ".env.js"
+				const inputChanged = splitPath[splitPath.length - 1] === options.relativeRoot
 
 				if (inputChanged && initialized) {
 					await buildEnv(options)

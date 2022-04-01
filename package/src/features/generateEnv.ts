@@ -2,10 +2,9 @@ import fs from "fs"
 import { performance } from "perf_hooks"
 import { getEnv } from "./utils/getEnv"
 import { printElapsed } from "./utils/printElapsed"
-import { getRelativeRoot } from "./utils/getRelativeRoot"
-import type { Options } from "../main"
+import type { InternalOptions } from "../main"
 
-export async function generateEnv(options: Options) {
+export async function generateEnv(options: InternalOptions): Promise<void> {
 	try {
 		const start = performance.now()
 		const env = await getEnv(options)
@@ -14,11 +13,7 @@ export async function generateEnv(options: Options) {
 			throw new Error(`Property "${options.mode}" doesn't exist`)
 		}
 
-		let envStr = `# Generated file. Edit in ${getRelativeRoot(options)}\n`
-
-		if (!options?.mode) {
-			throw new Error(`Expected "mode" option to be a string. Received ${typeof options?.mode}`)
-		}
+		let envStr = `# Generated file. Edit in ${options.relativeRoot}\n`
 
 		for (const [key, val] of Object.entries(env[options.mode])) {
 			if (typeof val === "string") {
@@ -28,11 +23,7 @@ export async function generateEnv(options: Options) {
 			envStr += `${key}=${val}\n`
 		}
 
-		if (!options?.envOutput) {
-			throw new Error(`Expected "envOutput" option to be a string. Received ${typeof options?.envOutput}`)
-		}
-
-		fs.writeFileSync(options.envOutput, envStr, "utf-8")
+		fs.writeFileSync(options.envPath, envStr, "utf-8")
 
 		printElapsed(start, "[env_gen] Generated Env")
 	} catch (err) {

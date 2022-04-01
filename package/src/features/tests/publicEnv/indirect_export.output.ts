@@ -1,4 +1,4 @@
-// Generated file. Do not edit.
+// Generated file. Edit in .env.js
 export const test = "true"
 
 const development = {

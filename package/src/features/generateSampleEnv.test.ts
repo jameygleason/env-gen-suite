@@ -18,7 +18,7 @@ describe("Generate Sample Env Output", () => {
 				"utf8",
 			)
 
-			const data = parseEnv(input, false)
+			const data = parseEnv(".env.js", input, false)
 			assert.strictEqual(data, output)
 		}
 	})

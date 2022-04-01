@@ -1,17 +1,21 @@
 import fs from "fs"
 import { performance } from "perf_hooks"
-import { paths } from "../config"
 import { parseEnv } from "./utils/parseEnv"
 import { printElapsed } from "./utils/printElapsed"
+import type { InternalOptions } from "../main"
 
-export function generateSampleEnv() {
+export function generateSampleEnv(options: InternalOptions): void {
 	try {
+		if (typeof options.samplePath !== "string") {
+			return
+		}
+
 		const start = performance.now()
-		const input = fs.readFileSync(paths.input, "utf-8")
+		const input = fs.readFileSync(options.inputPath, "utf-8")
 
-		const content = parseEnv(input, false)
+		const content = parseEnv(options.relativeRoot, input, false)
 
-		fs.writeFileSync(paths.sampleEnv, content, "utf-8")
+		fs.writeFileSync(options.samplePath, content, "utf-8")
 
 		printElapsed(start, "[env_gen] Generated Sample Env")
 	} catch (err) {
