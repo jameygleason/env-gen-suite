@@ -14,7 +14,7 @@ export async function buildEnv(options: InternalOptions): Promise<void> {
 		await generateEnv(options)
 		await generatePublicEnv(options)
 
-		if (typeof options.samplePath !== "string") {
+		if (typeof options.samplePath === "string") {
 			generateSampleEnv(options)
 		}
 	} catch (err) {

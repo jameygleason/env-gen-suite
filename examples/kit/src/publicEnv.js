@@ -1,7 +1,5 @@
 // Generated file. Edit in .env.js
-const publicVars = {
-	PUB_KEY: 123,
-	PUBLIC: true,
-}
-
-export default publicVars
+export default {
+	PUB_KEY: 0,
+	PUBLIC: false
+};

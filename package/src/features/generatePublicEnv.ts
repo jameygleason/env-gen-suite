@@ -3,6 +3,7 @@ import { performance } from "perf_hooks"
 import { getEnv } from "./utils/getEnv"
 import { printElapsed } from "./utils/printElapsed"
 import { objectToString } from "./utils/objectToString"
+import { parseEnv } from "./utils/parseEnv"
 import type { InternalOptions } from "../main"
 
 export async function generatePublicEnv(options: InternalOptions): Promise<void> {
@@ -16,7 +17,7 @@ export async function generatePublicEnv(options: InternalOptions): Promise<void>
 
 		const vars = env.publicVars[options.mode]
 
-		const contents = `export default ${objectToString(vars)}\n`
+		const contents = parseEnv(options.relativeRoot, `export default ${objectToString(vars)}\n`, true)
 
 		fs.writeFileSync(options.publicPath, contents)
 

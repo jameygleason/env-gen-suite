@@ -1,4 +1,4 @@
-// Generated file. Do not edit.
+// Generated file. Edit in .env.js
 // Test
 // String "I don't get replaced, but the string below me gets replaced because it comes after a colon"
 // String: ""
