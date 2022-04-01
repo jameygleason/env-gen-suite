@@ -18,5 +18,5 @@
 			"@signalchain/utils/rimraf": ["node_modules/@signalchain/utils/dist/rimraf"]
 		}
 	},
-	"exclude": ["node_modules", "dist", "data/generated"]
+	"exclude": ["node_modules", "dist", "types"]
 }
