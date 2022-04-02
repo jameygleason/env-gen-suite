@@ -9,7 +9,7 @@ export async function generateEnv(options: InternalOptions): Promise<void> {
 		const start = performance.now()
 		const env = await getEnv(options)
 
-		if (!Object.prototype.hasOwnProperty.call(env, options.mode)) {
+		if (!Object.prototype.hasOwnProperty.call(env, options?.mode)) {
 			throw new Error(`Property "${options.mode}" doesn't exist`)
 		}
 

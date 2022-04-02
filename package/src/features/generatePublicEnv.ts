@@ -11,7 +11,7 @@ export async function generatePublicEnv(options: InternalOptions): Promise<void>
 		const start = performance.now()
 
 		const env = await getEnv(options)
-		if (!env?.publicVars || !Object.prototype.hasOwnProperty.call(env.publicVars, options.mode)) {
+		if (!env?.publicVars || !Object.prototype.hasOwnProperty.call(env.publicVars, options?.mode)) {
 			return
 		}
 
