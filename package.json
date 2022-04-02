@@ -16,6 +16,8 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"lint": "lint-staged --config .config/lint-staged.config.cjs",
 		"push": "sh ./.config/scripts/push.sh",
+		"patch": "cd package && npm run patch",
+		"minor": "cd package && npm run minor",
 		"postinstall": "rm -rf .config/husky && husky install .config/husky && husky add .config/husky/pre-commit \"npm run lint\""
 	},
 	"devDependencies": {

@@ -171,7 +171,11 @@ function parseNumber() {
 
 function parseVar() {
 	while (!outOfBounds()) {
-		if (!/[a-zA-Z0-9_-]/.test(currChar())) {
+		if (currChar() === "?" && peekNext() !== ".") {
+			break
+		}
+
+		if (!/[a-zA-Z0-9_\-.[\]"'`${}]/.test(currChar())) {
 			break
 		}
 		acceptChar()
