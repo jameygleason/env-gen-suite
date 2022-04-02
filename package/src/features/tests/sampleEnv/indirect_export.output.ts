@@ -26,6 +26,8 @@ const publicEnv = {
 		...sharedPublic,
 		NUMBER: 0,
 		TEMPLATED_TEMPLATE: "",
+		TERNARY: false ? "" : "",
+		TERNARY_TWO: false ? "" : "",
 	},
 	production: {
 		...sharedPublic,

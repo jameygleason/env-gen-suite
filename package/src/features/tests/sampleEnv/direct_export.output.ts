@@ -11,6 +11,8 @@ export default {
 			TEST: false,
 			NUMBER: 0,
 			TEMPLATED_TEMPLATE: "",
+			TERNARY: false ? "" : "",
+			TERNARY_TWO: false ? "" : "",
 		},
 		production: {
 			TEST: false,

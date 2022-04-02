@@ -137,27 +137,22 @@ function parseString() {
 
 	if (state.preserve === false) {
 		insert('""')
-		return
+		return checkLogicOperators()
 	}
 
 	if (state.preserve === true) {
 		if (str[0] === "%" && str[str.length - 1] === "%") {
 			insert(str.slice(1, str.length - 1))
-			return
+			return checkLogicOperators()
 		}
 		insert(`"${str}"`)
 	}
+
+	return checkLogicOperators()
 }
 
 function parseNumber() {
-	while (
-		!outOfBounds() &&
-		!isNaN(Number(currChar())) &&
-		currChar() !== "\n" &&
-		currChar() !== "\r" &&
-		currChar() !== "\t" &&
-		currChar() !== " "
-	) {
+	while (!outOfBounds() && !isNaN(Number(currChar())) && !/\s/.test(currChar())) {
 		if (state.preserve === false) {
 			eat()
 		}
@@ -170,6 +165,8 @@ function parseNumber() {
 	if (state.preserve === false) {
 		insert(0)
 	}
+
+	return checkLogicOperators()
 }
 
 function parseVar() {
@@ -179,6 +176,8 @@ function parseVar() {
 		}
 		acceptChar()
 	}
+
+	return checkLogicOperators()
 }
 
 function parseBool() {
@@ -202,6 +201,8 @@ function parseBool() {
 	if (state.preserve === false) {
 		insert("false")
 	}
+
+	return checkLogicOperators()
 }
 
 function parseObject() {
@@ -222,16 +223,61 @@ function parseObject() {
 	return parseObject()
 }
 
+function checkLogicOperators() {
+	acceptWhitespace()
+
+	let operator: boolean | number | string = false
+
+	const lo = ["=", "|", "?", "&", ":"]
+	const loMap = {
+		"==": "==",
+		"===": "===",
+		"||": "||",
+		"??": "??",
+		"&&": "&&",
+		"?": "?",
+		":": ":",
+	}
+
+	for (let i = 0; i < lo.length; i++) {
+		operator = lo.indexOf(currChar())
+	}
+
+	if (operator !== -1) {
+		if (loMap?.[currChar() + peekNext(2)]) {
+			operator = loMap[currChar() + peekNext(2)]
+		}
+
+		if (loMap?.[currChar() + peekNext(1)]) {
+			operator = loMap[currChar() + peekNext(1)]
+		}
+
+		if (loMap?.[currChar()]) {
+			operator = loMap[currChar()]
+		}
+
+		if (typeof operator === "string") {
+			insert(operator)
+
+			for (let i = 0; i < operator.length; i++) {
+				eat()
+			}
+
+			return parseAssignment()
+		}
+	}
+}
+
 function currChar() {
 	return state.input[state.pos]
 }
 
-// function peekNext() {
-// 	return state.input[state.pos + 1]
-// }
+function peekNext(stride = 1) {
+	return state.input[state.pos + stride]
+}
 
-function peekPrev() {
-	return state.input[state.pos - 1]
+function peekPrev(stride = 1) {
+	return state.input[state.pos - stride]
 }
 
 function acceptChar() {
@@ -252,7 +298,7 @@ function eat() {
 }
 
 function acceptWhitespace() {
-	while (state.input[state.pos] === " " || state.input[state.pos] === "\n" || state.input[state.pos] === "\r") {
+	while (/\s/.test(state.input[state.pos])) {
 		if (outOfBounds()) {
 			break
 		}

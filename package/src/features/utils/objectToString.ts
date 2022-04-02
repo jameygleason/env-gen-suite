@@ -9,7 +9,7 @@ export function objectToString<T>(arg: T, pad = "", indention = "tabs"): string 
 				pad +
 				indent +
 				// @ts-ignore
-				objectToString(typeof arg[i] === "string" ? `"${arg[i]}"` : arg[i], pad + indent, indention) +
+				objectToString(typeof arg[i] === "string" ? handleQuoteType(arg[i]) : arg[i], pad + indent, indention) +
 				"," +
 				"\n"
 		}
@@ -34,7 +34,7 @@ export function objectToString<T>(arg: T, pad = "", indention = "tabs"): string 
 				": " +
 				objectToString(
 					// eslint-disable-next-line @typescript-eslint/no-explicit-any
-					(arg as any)[k].constructor === String ? `"${(arg as any)[k]}"` : (arg as any)[k],
+					(arg as any)[k].constructor === String ? handleQuoteType((arg as any)[k]) : (arg as any)[k],
 					pad + indent,
 					indention,
 				) +
@@ -47,4 +47,28 @@ export function objectToString<T>(arg: T, pad = "", indention = "tabs"): string 
 	}
 
 	return out
+}
+
+function handleQuoteType(str: string): string {
+	let newStr = ""
+	let strType = '"'
+	const quotes: Array<string> = []
+
+	for (let i = 0; i < str.length; i++) {
+		if (str[i] === '"') {
+			strType = "'"
+			quotes.push("'")
+		}
+		if (str[i] === "'") {
+			strType = '"'
+			quotes.push('"')
+		}
+		newStr += str[i]
+	}
+
+	if (Array.from(new Set(quotes)).length === 2) {
+		strType = "`"
+	}
+
+	return strType + newStr + strType
 }

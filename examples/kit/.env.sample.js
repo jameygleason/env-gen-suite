@@ -35,7 +35,11 @@ const publicVars = {
 	development: {
 		PUB_KEY: 0,
 		...sharedPublic,
-		TEMPLATE: ""
+		TEMPLATE: "",
+		TERNARY: false ? "" : "",
+		TERNARY_TWO: false
+			? ""
+			: ""
 	},
 	production: {
 		...sharedPublic,
