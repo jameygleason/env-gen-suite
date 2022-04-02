@@ -9,6 +9,7 @@ export default {
 		development: {
 			TEST: true,
 			NUMBER: 29475,
+			TEMPLATED_TEMPLATE: "%`${window.location.host}`%",
 		},
 		production: {
 			TEST: true,

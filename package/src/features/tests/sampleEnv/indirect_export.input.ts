@@ -24,6 +24,7 @@ const publicEnv = {
 		TEST: true,
 		...sharedPublic,
 		NUMBER: 29475,
+		TEMPLATED_TEMPLATE: "%`${window.location.host}`%",
 	},
 	production: {
 		...sharedPublic,

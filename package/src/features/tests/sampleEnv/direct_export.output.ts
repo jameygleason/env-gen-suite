@@ -10,6 +10,7 @@ export default {
 		development: {
 			TEST: false,
 			NUMBER: 0,
+			TEMPLATED_TEMPLATE: "",
 		},
 		production: {
 			TEST: false,
