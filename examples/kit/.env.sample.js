@@ -26,19 +26,21 @@ const production = {
 };
 
 const sharedPublic = {
-	PUBLIC: false
-	// TODO: Handle template string templates
-	// PRINT_STRING: ""
+	PUBLIC: false,
+	// COMMENT: test
+	PRINT_STRING: ""
 };
 
 const publicVars = {
 	development: {
 		PUB_KEY: 0,
-		...sharedPublic
+		...sharedPublic,
+		TEMPLATE: ""
 	},
 	production: {
 		...sharedPublic,
-		PUB_KEY: 0
+		PUB_KEY: 0,
+		TEMPLATE: ""
 	}
 };
 

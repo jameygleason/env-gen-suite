@@ -122,22 +122,34 @@ function parseAssignment() {
 
 function parseString() {
 	let delim = currChar()
+	let str = ""
 	eat()
-	insert('"')
 
 	while (!outOfBounds()) {
 		if (currChar() === delim && peekPrev() !== "\\") {
 			eat()
-			insert('"')
+			break
+		}
+
+		str += currChar()
+		eat()
+	}
+
+	if (state.preserve === false) {
+		insert('""')
+		return
+	}
+
+	if (state.preserve === true) {
+		if (str[0] === "%" && str[str.length - 1] === "%") {
+			insert(str.slice(1, str.length - 1))
 			return
 		}
-		eat()
+		insert(`"${str}"`)
 	}
 }
 
 function parseNumber() {
-	insert(0)
-
 	while (
 		!outOfBounds() &&
 		!isNaN(Number(currChar())) &&
@@ -146,7 +158,17 @@ function parseNumber() {
 		currChar() !== "\t" &&
 		currChar() !== " "
 	) {
-		eat()
+		if (state.preserve === false) {
+			eat()
+		}
+
+		if (state.preserve === true) {
+			acceptChar()
+		}
+	}
+
+	if (state.preserve === false) {
+		insert(0)
 	}
 }
 
@@ -160,13 +182,26 @@ function parseVar() {
 }
 
 function parseBool() {
+	const boolChars = ["t", "r", "u", "e", "f", "a", "l", "s", "e"]
 	while (!outOfBounds()) {
-		if (!/[a-zA-Z0-9_-]/.test(currChar())) {
-			break
+		if (state.preserve === false) {
+			if (!boolChars.includes(currChar())) {
+				break
+			}
+			eat()
 		}
-		eat()
+
+		if (state.preserve === true) {
+			if (!boolChars.includes(currChar())) {
+				break
+			}
+			acceptChar()
+		}
 	}
-	insert("false")
+
+	if (state.preserve === false) {
+		insert("false")
+	}
 }
 
 function parseObject() {
@@ -200,6 +235,10 @@ function peekPrev() {
 }
 
 function acceptChar() {
+	if (currChar() === undefined) {
+		return
+	}
+
 	state.output += currChar()
 	state.pos++
 }

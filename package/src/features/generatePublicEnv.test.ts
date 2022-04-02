@@ -3,12 +3,9 @@ import path from "path"
 import { describe, it, assert } from "vitest"
 import { parseEnv } from "./utils/parseEnv"
 
-const tests = [
-	{ file: "direct_export" },
-	// { file: "indirect_export" }
-]
+const tests = [{ file: "direct_export" }]
 
-describe.skip("Generate Public Env Output", () => {
+describe("Generate Public Env Output", () => {
 	it("Generates public env output as string", () => {
 		for (const { file } of tests) {
 			let input = fs.readFileSync(
