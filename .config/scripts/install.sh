@@ -1,33 +1,32 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-echo "" && \
-echo Installing Root Deps && \
-echo "" && \
-npm i && \
+echo ""
+echo Installing Root Deps
+echo ""
+npm i
 
-echo "" && \
-echo Installing ENV Gen Deps && \
-echo "" && \
-cd package && \
-npm i && \
-echo "" && \
+echo ""
+echo Installing Package Deps
+echo ""
+cd package
+npm i
 
-echo Building ENV Gen && \
-echo "" && \
-npm run build && \
+echo ""
+echo Building Package
+echo ""
+npm run build
+cd ..
 
-echo "" && \
-echo Installing Sapper Example Deps && \
-echo "" && \
-cd ../examples/sapper && \
-npm i && \
+echo ""
+echo Installing Kit Example Deps
+echo ""
+cd ./examples/kit
+npm i
+cd ..
 
-echo "" && \
-echo Installing Kit Example Deps && \
-echo "" && \
-cd ../kit && \
-npm i && \
-
-cd ../.. && \
-
-exit
+echo ""
+echo Installing Test Example Deps
+echo ""
+cd ./examples/test
+npm i
+cd ..
