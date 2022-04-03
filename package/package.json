@@ -1,9 +1,9 @@
 {
 	"name": "@signalchain/rollup-plugin-env-gen",
-	"version": "0.5.3",
+	"version": "0.5.4",
 	"author": "",
 	"license": "",
-	"description": "[WIP]",
+	"description": "Config based generation of a `.env` and public variables file. Manage your environment secrets and public application variables from a single JavaScript file.",
 	"type": "module",
 	"main": "./dist/index.cjs",
 	"module": "./dist/index.js",
@@ -20,9 +20,14 @@
 		}
 	},
 	"keywords": [
-		"graphql",
-		"graphql client",
-		"graphql fetch"
+		"environment variables",
+		"dotenv",
+		"env",
+		".env",
+		"environment",
+		"variables",
+		"config",
+		"settings"
 	],
 	"repository": {
 		"type": "git",

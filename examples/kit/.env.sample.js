@@ -28,6 +28,7 @@ const production = {
 const sharedPublic = {
 	PUBLIC: false,
 	// COMMENT: test
+	// SECRET_COMMENT: ""
 	PRINT_STRING: ""
 };
 

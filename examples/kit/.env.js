@@ -27,6 +27,7 @@ const production = {
 const sharedPublic = {
 	PUBLIC: true,
 	// COMMENT: test
+	// SECRET_COMMENT: "Ssh! I'm a secret in a comment."
 	PRINT_STRING: '%`http://${window.location.host}`%'
 };
 
