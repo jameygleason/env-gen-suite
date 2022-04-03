@@ -1,7 +1,7 @@
 import fs from "fs"
 import { performance } from "perf_hooks"
+import { printElapsed } from "@signalchain/utils/printElapsed"
 import { getEnv } from "./utils/getEnv"
-import { printElapsed } from "./utils/printElapsed"
 import type { InternalOptions } from "../main"
 
 export async function generateEnv(options: InternalOptions): Promise<void> {

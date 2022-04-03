@@ -1,6 +1,6 @@
 import fs from "fs"
 import { performance } from "perf_hooks"
-import { printElapsed } from "./utils/printElapsed"
+import { printElapsed } from "@signalchain/utils/printElapsed"
 
 export function generateEnvJS(options): void {
 	try {
