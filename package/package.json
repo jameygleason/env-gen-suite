@@ -44,10 +44,8 @@
 		"dev": "cross-env NODE_ENV=development rollup -c -w",
 		"build": "cross-env NODE_ENV=production && rollup -c",
 		"test": "vitest --config=.config/vite.config.ts",
-		"minor": "npm run minor:pre && npm publish",
-		"minor:pre": "npm run build && npm version minor",
-		"patch": "npm run patch:pre && npm publish",
-		"patch:pre": "npm run build && npm version patch"
+		"minor": "npm run build && npm version minor && npm publish",
+		"patch": "npm run build && npm version patch && npm publish"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^21.0.3",
