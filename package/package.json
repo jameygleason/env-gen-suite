@@ -1,6 +1,6 @@
 {
 	"name": "@signalchain/rollup-plugin-env-gen",
-	"version": "0.5.6",
+	"version": "0.5.7",
 	"author": "",
 	"license": "",
 	"description": "Config based generation of a `.env` and public variables file. Manage your environment secrets and public application variables from a single JavaScript file.",

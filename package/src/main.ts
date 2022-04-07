@@ -62,9 +62,10 @@ export default function envGen(o: Options) {
 				}
 				initialized = true
 
-				if (options?.watch === true) {
+				// @ts-ignore
+				if (options?.watch === true && !!this?.addWatchFile) {
 					// @ts-ignore
-					this?.addWatchFile(options.inputPath)
+					this.addWatchFile(options.inputPath)
 				}
 			} catch (err) {
 				console.error(err)
