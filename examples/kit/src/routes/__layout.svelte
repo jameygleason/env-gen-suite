@@ -1,6 +1,12 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import Header from '$lib/header/Header.svelte';
 	import '../app.css';
+
+	onMount(async () => {
+		const env = await import('../publicEnv.js');
+		console.log('env:', env?.default?.PUBLIC);
+	});
 </script>
 
 <Header />

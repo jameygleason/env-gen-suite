@@ -24,7 +24,7 @@
 		"strictPropertyInitialization": true,
 		"target": "es2019",
 		"stripInternal": true,
-		"types": ["mocha", "node"],
+		"types": ["node"],
 		"paths": {
 			"@signalchain/utils/objectToString": ["node_modules/@signalchain/utils/dist/objectToString"],
 			"@signalchain/utils/printElapsed": ["node_modules/@signalchain/utils/dist/printElapsed"],

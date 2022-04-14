@@ -22,7 +22,8 @@ const config = {
 				envGen({
 					mode
 				})
-			]
+			],
+			clearScreen: false
 		})
 	}
 };

@@ -35,6 +35,16 @@ export type InternalOptions = {
 	relativeRoot: string
 }
 
+let initialized = false
+let forceBuild = false
+
+async function runBuild(options) {
+	if (!initialized || forceBuild) {
+		await buildEnv(options)
+		initialized = true
+	}
+}
+
 export default function envGen(o: Options) {
 	const options: InternalOptions = {
 		mode: o?.mode || process.env?.NODE_ENV || "",
@@ -47,31 +57,28 @@ export default function envGen(o: Options) {
 	}
 
 	if (!!options?.mode === false) {
-		throw new Error('NODE_ENV could not be detected. Missing required field "mode".')
+		throw new Error('NODE_ENV could not be detected. Missing required field "mode"')
 	}
-
-	let initialized = false
 
 	return {
 		name: "env-gen",
 
-		buildStart() {
+		async buildStart() {
 			try {
-				if (!initialized) {
-					buildEnv(options)
-				}
-				initialized = true
-
+				// Rollup
 				// @ts-ignore
 				if (options?.watch === true && !!this?.addWatchFile) {
 					// @ts-ignore
 					this.addWatchFile(options.inputPath)
 				}
+
+				await runBuild(options)
 			} catch (err) {
 				console.error(err)
 			}
 		},
 
+		// Rollup
 		async watchChange(file: string) {
 			try {
 				const splitPath = file.split(path.sep)
@@ -84,5 +91,26 @@ export default function envGen(o: Options) {
 				console.error(err)
 			}
 		},
+
+		// The function getEnv holds a reference to the file contents at the initial load
+		// This means that every time the build re-runs, it writes the output file with same data that it had when the server was initially started
+		// // Vite
+		// configureServer(server) {
+		// 	server.watcher.add([options.inputPath])
+		// 	server.watcher.on("add", handleFileChange)
+		// 	server.watcher.on("change", handleFileChange)
+		// 	server.watcher.on("unlink", handleFileChange)
+
+		// 	async function handleFileChange(file) {
+		// 		if (file !== options.inputPath) {
+		// 			return
+		// 		}
+
+		// 		forceBuild = true
+		// 		await runBuild(options)
+		// 		server.ws.send({ type: "full-reload" })
+		// 		forceBuild = false
+		// 	}
+		// },
 	}
 }
