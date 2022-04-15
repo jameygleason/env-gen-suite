@@ -10,7 +10,6 @@ echo Installing Package Deps
 echo ""
 cd package
 npm i
-
 echo ""
 echo Building Package
 echo ""
@@ -22,11 +21,11 @@ echo Installing Kit Example Deps
 echo ""
 cd ./examples/kit
 npm i
-cd ..
+cd ../..
 
 echo ""
 echo Installing Test Example Deps
 echo ""
 cd ./examples/test
 npm i
-cd ..
+cd ../..
