@@ -8,7 +8,8 @@
 
 const shared = {
 	PORT: 3000,
-	APP_SECRET: 'bringadingdingdingdingdingdingdingdingdingdingdingdingdingdingding',
+	APP_SECRET:
+		'bringadingdingdingdingdingdingdingdingdingdingdingdingdingdingdingdingdingdingdingdingding',
 	'123NUM_TEST': 'test'
 };
 
