@@ -1,7 +1,10 @@
 import fs from "fs"
 import { performance } from "perf_hooks"
-import { objectToString } from "@signalchain/utils/objectToString"
-import { printElapsed } from "@signalchain/utils/printElapsed"
+// eslint-disable-next-line import/no-unresolved
+import { objectToString } from "@signalchain/utils"
+// @ts-ignore
+// eslint-disable-next-line import/no-unresolved
+import { printElapsed } from "@signalchain/utils/node"
 import { getEnv } from "./utils/getEnv"
 import { parseEnv } from "./utils/parseEnv"
 import type { InternalOptions } from "../main"

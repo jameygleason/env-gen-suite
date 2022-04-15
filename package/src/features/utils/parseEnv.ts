@@ -90,7 +90,7 @@ function parseExport() {
 }
 
 function parseAssignment() {
-	acceptWhitespace()
+	eatSpace()
 
 	if (currChar() === "{") {
 		return parseObject()
@@ -308,6 +308,16 @@ function acceptWhitespace() {
 		}
 		acceptChar()
 	}
+}
+
+function eatSpace() {
+	while (/\s/.test(state.input[state.pos])) {
+		if (outOfBounds()) {
+			break
+		}
+		eat()
+	}
+	insert(" ")
 }
 
 function outOfBounds() {

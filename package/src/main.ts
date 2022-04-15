@@ -94,23 +94,23 @@ export default function envGen(o: Options) {
 
 		// The function getEnv holds a reference to the file contents at the initial load
 		// This means that every time the build re-runs, it writes the output file with same data that it had when the server was initially started
-		// // Vite
-		// configureServer(server) {
-		// 	server.watcher.add([options.inputPath])
-		// 	server.watcher.on("add", handleFileChange)
-		// 	server.watcher.on("change", handleFileChange)
-		// 	server.watcher.on("unlink", handleFileChange)
+		// Vite
+		configureServer(server) {
+			server.watcher.add([options.inputPath])
+			server.watcher.on("add", handleFileChange)
+			server.watcher.on("change", handleFileChange)
+			server.watcher.on("unlink", handleFileChange)
 
-		// 	async function handleFileChange(file) {
-		// 		if (file !== options.inputPath) {
-		// 			return
-		// 		}
+			async function handleFileChange(file) {
+				if (file !== options.inputPath) {
+					return
+				}
 
-		// 		forceBuild = true
-		// 		await runBuild(options)
-		// 		server.ws.send({ type: "full-reload" })
-		// 		forceBuild = false
-		// 	}
-		// },
+				forceBuild = true
+				await runBuild(options)
+				server.ws.send({ type: "full-reload" })
+				forceBuild = false
+			}
+		},
 	}
 }

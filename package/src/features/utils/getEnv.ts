@@ -1,17 +1,21 @@
-import os from "os"
+import path, { dirname } from "path"
+import { spawnSync } from "child_process"
+import { fileURLToPath } from "url"
 import type { InternalOptions } from "../../main"
 
-export async function getEnv(options: InternalOptions): Promise<Record<string, any>> {
-	try {
-		let env
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
-		if (os.platform() === "win32") {
-			env = await import(`file:\\${options.inputPath}`)
-		} else {
-			env = await import(`file:\\\\${options.inputPath}`)
+export async function getEnv(options: InternalOptions) {
+	try {
+		const prog = spawnSync("node", [path.join(__dirname, "getEnvExec.js"), `--options=${JSON.stringify(options)}`], {
+			encoding: "utf8",
+		})
+
+		if (prog.stderr) {
+			console.error(prog.stderr)
 		}
 
-		return env.default
+		return JSON.parse(prog.stdout)
 	} catch (err) {
 		console.error(err)
 		return {}

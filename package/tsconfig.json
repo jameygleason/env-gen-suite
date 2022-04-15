@@ -24,11 +24,11 @@
 		"strictPropertyInitialization": true,
 		"target": "es2019",
 		"stripInternal": true,
-		"types": ["node"],
 		"paths": {
-			"@signalchain/utils/objectToString": ["node_modules/@signalchain/utils/dist/objectToString"],
-			"@signalchain/utils/printElapsed": ["node_modules/@signalchain/utils/dist/printElapsed"],
-			"@signalchain/utils/rimraf": ["node_modules/@signalchain/utils/dist/rimraf"]
+			"@signalchain/utils": ["@signalchain/utils"],
+			"@signalchain/utils/node": ["@signalchain/utils/node"],
+			"@signalchain/utils/node/rimraf": ["node_modules/@signalchain/utils/dist/node/rimraf"],
+			"@signalchain/utils/node/copyRecursiveSync": ["node_modules/@signalchain/utils/dist/node/copyRecursiveSync"]
 		}
 	},
 	"exclude": ["node_modules", "dist", "types"]

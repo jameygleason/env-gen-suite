@@ -7,14 +7,18 @@ import resolve from "@rollup/plugin-node-resolve"
 import typescript from "@rollup/plugin-typescript"
 import dts from "rollup-plugin-dts"
 import filesize from "rollup-plugin-filesize"
-import { rimraf } from "@signalchain/utils"
+// @ts-ignore
+import { rimraf } from "@signalchain/utils/node/rimraf"
+// @ts-ignore
+import { copyRecursiveSync } from "@signalchain/utils/node/copyRecursiveSync"
 
 const pkg = JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json"), "utf8"))
 if (Object.keys(pkg).length === 0) {
 	console.error("Failed to parse package.json")
 }
 
-rimraf(path.join(process.cwd(), "dist"))
+const distDir = path.join(process.cwd(), "dist")
+rimraf(distDir)
 rimraf(path.join(process.cwd(), "types"))
 
 const config = {
@@ -110,6 +114,17 @@ export default [
 			commonjs(),
 			typescript(),
 			filesize(),
+			(function copy() {
+				return {
+					name: "copy-thing-to-dist",
+					buildEnd() {
+						copyRecursiveSync(
+							path.join(process.cwd(), "src", "prod", "getEnvExec.js"),
+							path.join(distDir, "getEnvExec.js"),
+						)
+					},
+				}
+			})(),
 		],
 		...config,
 	},

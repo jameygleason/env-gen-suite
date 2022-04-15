@@ -1,6 +1,8 @@
 import fs from "fs"
 import { performance } from "perf_hooks"
-import { printElapsed } from "@signalchain/utils/printElapsed"
+// @ts-ignore
+// eslint-disable-next-line import/no-unresolved
+import { printElapsed } from "@signalchain/utils/node"
 
 export function generateEnvJS(options): void {
 	try {
