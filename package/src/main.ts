@@ -92,8 +92,6 @@ export default function envGen(o: Options) {
 			}
 		},
 
-		// The function getEnv holds a reference to the file contents at the initial load
-		// This means that every time the build re-runs, it writes the output file with same data that it had when the server was initially started
 		// Vite
 		configureServer(server) {
 			server.watcher.add([options.inputPath])
