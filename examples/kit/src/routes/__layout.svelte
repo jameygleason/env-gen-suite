@@ -4,7 +4,7 @@
 	import '../app.css';
 
 	onMount(async () => {
-		const env = await import('../publicEnv.js');
+		const env = await import('../publicVars.js');
 		console.log('env:', env?.default?.PUBLIC);
 	});
 </script>
