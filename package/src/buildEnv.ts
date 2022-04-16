@@ -1,7 +1,7 @@
 import fs from "fs"
 import { generateEnv } from "./features/generateEnv"
 import { generateEnvJS } from "./features/generateEnvJS"
-import { generatePublicEnv } from "./features/generatePublicEnv"
+import { generatePublicVars } from "./features/generatePublicVars"
 import { generateSampleEnv } from "./features/generateSampleEnv"
 import type { InternalOptions } from "./main"
 
@@ -12,7 +12,7 @@ export async function buildEnv(options: InternalOptions): Promise<void> {
 		}
 
 		await generateEnv(options)
-		await generatePublicEnv(options)
+		await generatePublicVars(options)
 
 		if (typeof options.samplePath === "string") {
 			generateSampleEnv(options)

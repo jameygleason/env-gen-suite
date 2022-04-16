@@ -25,10 +25,8 @@
 		"target": "es2019",
 		"stripInternal": true,
 		"paths": {
-			"@signalchain/utils": ["@signalchain/utils"],
-			"@signalchain/utils/node": ["@signalchain/utils/node"],
-			"@signalchain/utils/node/rimraf": ["node_modules/@signalchain/utils/dist/node/rimraf"],
-			"@signalchain/utils/node/copyRecursiveSync": ["node_modules/@signalchain/utils/dist/node/copyRecursiveSync"]
+			"@signalchain/utils/node": ["node_modules/@signalchain/utils/dist/node"],
+			"@signalchain/utils/node/cleanDir": ["node_modules/@signalchain/utils/dist/node/cleanDir"]
 		}
 	},
 	"exclude": ["node_modules", "dist", "types"]

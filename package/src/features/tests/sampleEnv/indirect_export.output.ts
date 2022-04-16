@@ -20,7 +20,7 @@ const sharedPublic = {
 	// COMMENT: ""
 }
 
-const publicEnv = {
+const publicVars = {
 	development: {
 		TEST: false,
 		...sharedPublic,
@@ -40,5 +40,5 @@ const publicEnv = {
 export default {
 	development,
 	production,
-	publicEnv,
+	publicVars,
 }

@@ -8,9 +8,7 @@ import typescript from "@rollup/plugin-typescript"
 import dts from "rollup-plugin-dts"
 import filesize from "rollup-plugin-filesize"
 // @ts-ignore
-import { rimraf } from "@signalchain/utils/node/rimraf"
-// @ts-ignore
-import { copyRecursiveSync } from "@signalchain/utils/node/copyRecursiveSync"
+import { rimraf, copyRecursiveSync } from "@signalchain/utils/node"
 
 const pkg = JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json"), "utf8"))
 if (Object.keys(pkg).length === 0) {

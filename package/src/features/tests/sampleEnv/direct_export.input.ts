@@ -5,7 +5,7 @@ export default {
 	production: {
 		TEST: true,
 	},
-	publicEnv: {
+	publicVars: {
 		development: {
 			TEST: true,
 			NUMBER: 29475,

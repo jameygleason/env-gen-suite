@@ -6,14 +6,14 @@ type ConfigPaths = {
 	input: string
 	env: string
 	sampleEnv: string
-	publicEnv: string
+	publicVars: string
 }
 
 const paths: ConfigPaths = {
 	input: path.join(process.cwd(), ".env.js"),
 	env: path.join(process.cwd(), ".env"),
 	sampleEnv: path.join(process.cwd(), ".env.sample.js"),
-	publicEnv: path.join(process.cwd(), "src", "publicEnv.js"),
+	publicVars: path.join(process.cwd(), "src", "publicVars.js"),
 }
 
 export type Options = {
@@ -51,7 +51,7 @@ export default function envGen(o: Options) {
 		inputPath: o?.inputPath || paths.input,
 		envPath: o?.envPath || paths.env,
 		samplePath: o?.samplePath || paths.sampleEnv,
-		publicPath: o?.publicPath || paths.publicEnv,
+		publicPath: o?.publicPath || paths.publicVars,
 		watch: true,
 		relativeRoot: getRelativeRoot(o?.inputPath || paths.input),
 	}

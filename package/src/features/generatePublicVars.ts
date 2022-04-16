@@ -1,15 +1,12 @@
 import fs from "fs"
 import { performance } from "perf_hooks"
-// eslint-disable-next-line import/no-unresolved
 import { objectToString } from "@signalchain/utils"
-// @ts-ignore
-// eslint-disable-next-line import/no-unresolved
 import { printElapsed } from "@signalchain/utils/node"
 import { getEnv } from "./utils/getEnv"
 import { parseEnv } from "./utils/parseEnv"
 import type { InternalOptions } from "../main"
 
-export async function generatePublicEnv(options: InternalOptions): Promise<void> {
+export async function generatePublicVars(options: InternalOptions): Promise<void> {
 	try {
 		const start = performance.now()
 

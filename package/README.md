@@ -24,7 +24,7 @@ Public variables, such as those used in client side applications, will be genera
 
 ### Runtime Template Variables
 
-For runtime template strings in Public Env, wrap your template string like this ➡ `"%`YOUR_TEMPLATE_STRING`%"`. Wrapping is required to keep the template string from being evaluated at build time. This feature only makes sense for public vars, so any template string outside of the `publicEnv` object will be evaluated at build time.
+For runtime template strings in Public Vars, wrap your template string like this ➡ `"%`YOUR_TEMPLATE_STRING`%"`. Wrapping is required to keep the template string from being evaluated at build time. This feature only makes sense for public vars, so any template string outside of the `publicVars` object will be evaluated at build time.
 
 ## Use
 
@@ -34,7 +34,7 @@ export type Options = {
 	inputPath?: string // [PROJECT_ROOT]/.env.js
 	envPath?: string // [PROJECT_ROOT]/.env
 	samplePath?: string | boolean // [PROJECT_ROOT]/.env.sample.js
-	publicPath?: string // [PROJECT_ROOT]/src/publicEnv.js
+	publicPath?: string // [PROJECT_ROOT]/src/publicVars.js
 	watch?: boolean // true (WIP)
 }
 
@@ -42,7 +42,7 @@ export type Options = {
 plugins: [envGen(Options)]
 ```
 
-The `inputPath` defaults to `[PROJECT_ROOT]/.env.js`. That file exports a default object with a set of keys that will be used to match the `mode` option on build. If the `publicVars` key is in the exported object from the `inputPath`, it will generate a `publicEnv.js` file at the `publicPath`. (Defaults to `[PROJECT_ROOT]/src/publicEnv.js`.)
+The `inputPath` defaults to `[PROJECT_ROOT]/.env.js`. That file exports a default object with a set of keys that will be used to match the `mode` option on build. If the `publicVars` key is in the exported object from the `inputPath`, it will generate a `publicVars.js` file at the `publicPath`. (Defaults to `[PROJECT_ROOT]/src/publicVars.js`.)
 
 ## Example
 

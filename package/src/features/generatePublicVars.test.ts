@@ -5,8 +5,8 @@ import { parseEnv } from "./utils/parseEnv"
 
 const tests = [{ file: "direct_export" }]
 
-describe("Generate Public Env Output", () => {
-	it("Generates public env output as string", () => {
+describe("Generate Public Vars Output", () => {
+	it("Generates public vars output as string", () => {
 		for (const { file } of tests) {
 			let input = fs.readFileSync(
 				path.join(process.cwd(), "src", "features", "tests", "publicEnv", `${file}.input.ts`),
