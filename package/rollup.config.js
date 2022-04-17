@@ -6,9 +6,8 @@ import commonjs from "@rollup/plugin-commonjs"
 import resolve from "@rollup/plugin-node-resolve"
 import typescript from "@rollup/plugin-typescript"
 import dts from "rollup-plugin-dts"
-import filesize from "rollup-plugin-filesize"
 // @ts-ignore
-import { rimraf, copyRecursiveSync } from "@signalchain/utils/node"
+import { cleanDir, copyRecursiveSync } from "@signalchain/utils/node"
 
 const pkg = JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json"), "utf8"))
 if (Object.keys(pkg).length === 0) {
@@ -16,8 +15,8 @@ if (Object.keys(pkg).length === 0) {
 }
 
 const distDir = path.join(process.cwd(), "dist")
-rimraf(distDir)
-rimraf(path.join(process.cwd(), "types"))
+cleanDir(distDir)
+cleanDir(path.join(process.cwd(), "types"))
 
 const config = {
 	external: [].concat(
@@ -63,7 +62,17 @@ export default [
 			}),
 			commonjs(),
 			typescript(),
-			filesize(),
+			(function copy() {
+				return {
+					name: "copy-thing-to-dist",
+					buildEnd() {
+						copyRecursiveSync(
+							path.join(process.cwd(), "src", "prod", "getEnvExec.js"),
+							path.join(distDir, "getEnvExec.js"),
+						)
+					},
+				}
+			})(),
 		],
 		...config,
 	},
@@ -111,18 +120,6 @@ export default [
 			}),
 			commonjs(),
 			typescript(),
-			filesize(),
-			(function copy() {
-				return {
-					name: "copy-thing-to-dist",
-					buildEnd() {
-						copyRecursiveSync(
-							path.join(process.cwd(), "src", "prod", "getEnvExec.js"),
-							path.join(distDir, "getEnvExec.js"),
-						)
-					},
-				}
-			})(),
 		],
 		...config,
 	},
