@@ -13,17 +13,16 @@ export async function generateEnv(options: InternalOptions): Promise<void> {
 			throw new Error(`Property "${options.mode}" doesn't exist`)
 		}
 
-		let envStr = `# Generated file. Edit in ${options.relativeRoot}\n`
+		const envStream = fs.createWriteStream(options.envPath)
+		envStream.write(`# Generated file. Edit in ${options.relativeRoot}\n`)
 
 		for (const [key, val] of Object.entries(env[options.mode])) {
 			if (typeof val === "string") {
-				envStr += `${key}="${val}"\n`
+				envStream.write(`${key}="${val}"\n`)
 				continue
 			}
-			envStr += `${key}=${val}\n`
+			envStream.write(`${key}=${val}\n`)
 		}
-
-		fs.writeFileSync(options.envPath, envStr, "utf-8")
 
 		printElapsed(start, "[env_gen] Generated Env")
 	} catch (err) {
