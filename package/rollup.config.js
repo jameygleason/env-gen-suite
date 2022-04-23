@@ -6,7 +6,6 @@ import commonjs from "@rollup/plugin-commonjs"
 import resolve from "@rollup/plugin-node-resolve"
 import typescript from "@rollup/plugin-typescript"
 import dts from "rollup-plugin-dts"
-// @ts-ignore
 import { cleanDir, copyRecursiveSync } from "@signalchain/utils/node"
 
 const pkg = JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json"), "utf8"))
@@ -19,8 +18,7 @@ cleanDir(distDir)
 cleanDir(path.join(process.cwd(), "types"))
 
 const config = {
-	external: [].concat(
-		// @ts-ignore
+	external: /** @type {Array<Record<string, any>>} */ ([]).concat(
 		Object.keys(pkg.dependencies || {}),
 		Object.keys(pkg.devDependencies || {}),
 		Object.keys(pkg.peerDependencies || {}),
@@ -85,7 +83,7 @@ export default [
 			exports: "named",
 		},
 		plugins: [typescript(), dts()],
-		external: [].concat(
+		external: /** @type {Array<Record<string, any>>} */ ([]).concat(
 			Object.keys(pkg.dependencies || {}),
 			Object.keys(pkg.devDependencies || {}),
 			Object.keys(pkg.peerDependencies || {}),
